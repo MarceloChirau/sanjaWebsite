@@ -1,0 +1,17 @@
+.hamburger-btn {
+    /* Remove default button styling */
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 10px;
+  }
+  
+  .line {
+    /* Style for the three lines */
+    display: block;
+    width: 25px; /* Adjust size */
+    height: 3px; /* Thickness of the line */
+    margin: 5px 0; /* Space between lines */
+    background-color: #333; /* Color of the lines */
+    transition: all 0.3s ease; /* For smooth animation */
+  }
