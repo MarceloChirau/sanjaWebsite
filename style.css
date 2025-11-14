@@ -93,7 +93,7 @@ ul>li{
   text-decoration: none;
 
 }
-@media(min-width:932px){
+@media(min-width:844px){
   .hamburder-btn{
     display:none;
   }
