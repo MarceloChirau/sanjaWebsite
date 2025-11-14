@@ -1,17 +1,31 @@
+*{
+    margin:0;
+    padding:0;
+}
+header{
+    display:flex;
+    justify-content:space-around;
+    padding:10px 0;
+  }
+
+h1 a{
+    text-decoration:none;
+    color:black
+}
+
 .hamburger-btn {
-    /* Remove default button styling */
-    border: none;
-    background: none;
+    border: 2px solid gray;
+    background:none;
     cursor: pointer;
-    padding: 10px;
+    padding: 5px;
+    border-radius:2px;
   }
   
   .line {
-    /* Style for the three lines */
     display: block;
-    width: 25px; /* Adjust size */
-    height: 3px; /* Thickness of the line */
-    margin: 5px 0; /* Space between lines */
-    background-color: #333; /* Color of the lines */
-    transition: all 0.3s ease; /* For smooth animation */
+    width: 15px; 
+    height: 2px; 
+    margin: 2px 0;
+    background-color: #333; 
+    /* transition: all 0.3s ease;  */
   }
