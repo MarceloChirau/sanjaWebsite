@@ -2,19 +2,19 @@
   margin:0;
   padding:0;
 }
+:root{
+  --menu-width:20vw;
+}
+
 body{
   transition:transform 0.3s ease-out;
   overflow-x: hidden;
 }
-/* header{
-  display:flex;
-  justify-content: space-between;
-  align-items: center;
-} */
+
 .header{
   display:flex;
-  justify-content:space-between;
-  padding:15px 100px;
+  justify-content:space-around;
+  padding:15px 50px;
   margin-right:5px;
 }
 h1{
@@ -26,13 +26,14 @@ h1>a{
   text-decoration: none;
   color:black
 }
+.logo{
+  width:7em;
+}
 
 .hamburder-btn{
   border:2px solid rgba(128, 128, 128, 0.429);
-  /* padding: 10px; */
   background-color: transparent;
   border-radius: 5px;
-  /* margin-right:8rem; */
   cursor:pointer;
 }
 .line{
@@ -56,54 +57,72 @@ hr{
   border:none;
 }
 .menu-is-closed{
-  display: none;
-  
-  
+  position:fixed;
+  top:0;
+  right:0;
+  height:100vh;
+  width:var(--menu-width);
+  background-color: black;
+  z-index:100;
+  transform:translateX(100%);
+  transition: transform 0.3s ease-out;
+  text-align: center;
 }
 
 
 body.nav-open{
-  transform:translateX(-100px);
+  transform:translateX(calc(0px-var(--menu-width)));
 
 }
 body.nav-open .menu-is-closed{
   transform:translateX(0);
 }
-.menu-is-open{
-  display:block;
-  background-color: black;
-  position:fixed;
-  top:0;
-  right:-30vw;
-  width:40%;
-  height:100vh;
-  text-align: center;
-  justify-content:center;
-  padding-top:2em;
 
-}
 ul>li{
+  text-decoration: none;
   list-style-type: none;
   color:white;
-  padding-block:5px;
+  font-size: small;
+  margin-top: 2em;
+} 
+ul>li>a{
+  text-decoration: none;
+  list-style-type: none;
+  color:white;
+  padding:5px;
   font-size: small;
 } 
-.menu-is-open>ul>li>a{
-  color:white;
-  text-decoration: none;
 
-}
+
+
+
+
 @media(min-width:844px){
+  
+
   .hamburder-btn{
     display:none;
   }
   header{
     display:flex;
 
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
+    padding:15px 40px;
   }
-  .menu-is-closed,ul,li{
+  
+/* 4. Reset the Menu to be INLINE */
+ .menu-is-closed{
+  position:static; 
+  transform:none; 
+  height:auto;
+  width:auto;
+  background-color: white; 
+  z-index: auto;
+  padding-top: 0;
+} 
+ 
+   .menu-is-closed,ul,li{
     display:flex;
     flex-direction: row;
 justify-content: space-evenly;
@@ -116,6 +135,6 @@ padding:0 10px;
   }
   .menu-is-closed>ul>li>a:hover{
     color: black;
-  }
+  } 
   
 }
