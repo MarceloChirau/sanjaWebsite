@@ -17,17 +17,14 @@ body{
   padding:15px 50px;
   margin-right:5px;
 }
-h1{
 
-  font-family: Lora;
-
-}
-h1>a{
-  text-decoration: none;
-  color:black
+.logo-image{
+  /* max-width:100%;
+  height:auto; */
+  width:2em;
 }
 .logo{
-  width:7em;
+  width:2em;
 }
 
 .hamburder-btn{
@@ -35,6 +32,7 @@ h1>a{
   background-color: transparent;
   border-radius: 5px;
   cursor:pointer;
+  padding:0px 4px
 }
 .line{
   display:block;
@@ -106,7 +104,7 @@ ul>li>a{
   header{
     display:flex;
 
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     padding:15px 40px;
   }
