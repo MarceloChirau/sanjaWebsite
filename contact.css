@@ -1,0 +1,74 @@
+:root{
+    --menu-width:20vw;
+      --primary-color:rgb(93,16,10);
+      --secondary-color:#842A3B;
+      --third-color:#A3485A;
+      --fourth-color:#F5DAA7;
+      --sixth-color:#5D100A;
+      --seventh-color:#A75E61;
+      --eighth-color:#CA8F94;
+      --nineth-color:#E7BFC0;
+      --tenth-color:#FBE4E4;
+  
+  }
+  .welcome-contact{
+    display:flex;
+    justify-content: center;
+  }
+  h2 {
+    color:var(--primary-color);
+    font-size: 3rem;
+    opacity:1;
+    transform: translateY(0);
+    animation:fade-in 0.8s ease;
+  }
+ 
+
+
+.form-container{
+    width:100vw;
+   max-width:90%;
+    height:50%;
+    padding:10em 2em ;
+    margin:4rem auto;
+    background-color: var(--tenth-color);
+    
+}
+.form{
+    display:flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+}
+.inputs{
+    padding:0.2em ;
+}
+ input, textarea{
+    border:none;
+    border-radius:2px;
+}
+
+label{
+    color:var(--third-color)
+}
+.submitBtn{
+    background-color: var(--eighth-color);
+    padding:0.3em 1em;
+    border:none;
+    border-radius:3px;
+    color:var(--secondary-color);
+    cursor:pointer
+}
+.submitBtn:hover{
+    background-color: var(--third-color)
+    
+}
+  @keyframes fade-in{
+    0%{
+     opacity:0;
+     transform:translateY(50px);
+    }
+    
+ }
+
+

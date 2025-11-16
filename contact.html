@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact</title>
+    <link href="style.css" rel="stylesheet">
+    <link href="contact.css" rel="stylesheet">
+
+</head>
+<body>
+    <header>
+        <div class="header">
+            <h1>
+                <a href="index.html" >
+<img class="logo-image" src="brand/logoPng.png" alt="logo vrbanus">                   
+                </a>
+                </h1>
+        
+            <button class="hamburder-btn">
+                <span class="line line-top"></span>
+                <span class="line line-middle"></span>
+                <span class="line line-bottom"></span>
+        
+            </button>
+        </div>
+   
+       
+        <nav class="menu-is-closed ">
+            <ul >
+                <li>
+                    <a href="index.html" >HOME</a>
+                </li>
+                <li>
+                    <a href="gallery.html" >GALLERY</a>
+                </li> 
+                <li>
+                    <a href="shop.html" >SHOP</a>
+                </li>
+                <li>
+                    <a href="contact.html">CONTACT</a>
+                </li>
+            </ul>
+        </nav>
+
+    </header>
+    <hr>
+   <div class="welcome-contact">
+    <h2>Let's get in touch!</h2>
+   </div> 
+
+    <div class="form-container">
+        <form class="form" method="POST" action="/submit">
+            <div class="inputs" >
+                <label for="name" >Full Name:</label>
+                <input id="name" type="text" name="name">
+            </div>
+            <div class="inputs" >
+                <label for="email">Email:</label>
+                <input id="email" type="email" name="email">
+            </div>
+            <div class="inputs" >
+                <label for="message">Message:
+                </label>
+                <textarea id="message" name="message"></textarea>
+
+            </div>
+            
+            <div class="inputs">
+                <button class="submitBtn" type="submit">Send</button>
+
+            </div>
+            
+        </form>
+    </div>
+
+
+   <script src="script.js"></script>
+</body>
+</html>
