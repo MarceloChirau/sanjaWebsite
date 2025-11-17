@@ -43,7 +43,7 @@
 
 }
 .img-box-stamps{
-    width:200px;
+    width:180px;
     height:auto;
     padding-bottom: 0.5em;
 }
@@ -53,9 +53,10 @@
 }
 
 
-@media(min-width:844px){
+@media(min-width:846px){
     .team-stamps{
         margin-top:26rem;
+       
     }
     .img-box-stamps{
         width:400px;
