@@ -1,0 +1,65 @@
+*{
+    margin:0;
+    padding:0;
+
+}
+
+.stamp-container{
+    display:flex;
+    flex-direction: column;
+}
+.img-box{
+    width:100vw;
+    height:auto;
+    margin-bottom: 2rem;
+}
+.hero-stamp>img{
+    width:100%;
+    height:auto;
+}
+.parallax{
+    display: block;
+    width:70%;
+    height:506.2px;
+    position:static;
+    background-image: url('stamp-Images/stamp-office.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-attachment: scroll;
+    /* transition: transform 0.8s ease; */
+    transform:translate(0px,58.2px);
+    margin:0 auto;
+
+}
+
+.team-stamps{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    margin-top: 14rem;
+    margin-bottom: 7rem;
+
+}
+.img-box-stamps{
+    width:200px;
+    height:auto;
+    padding-bottom: 0.5em;
+}
+.img-box-stamps>img{
+    width:100%;
+    height:auto;
+}
+
+
+@media(min-width:844px){
+    .team-stamps{
+        margin-top:26rem;
+    }
+    .img-box-stamps{
+        width:400px;
+        height:auto;
+padding-bottom:4em
+    }
+}

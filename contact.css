@@ -20,7 +20,13 @@
     font-size: 3rem;
     opacity:1;
     transform: translateY(0);
-    animation:fade-in 0.8s ease;
+    animation:fade-in 1.8s ease;
+  }
+  h3{
+    color:var(--primary-color);
+  }
+  p{
+    color:var(--third-color);
   }
  
 
@@ -41,7 +47,11 @@
     align-items: center;
 }
 .inputs{
-    padding:0.2em ;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding:0.5em ;
 }
  input, textarea{
     border:none;
@@ -49,7 +59,8 @@
 }
 
 label{
-    color:var(--third-color)
+    color:var(--third-color);
+    padding:0.2em;
 }
 .submitBtn{
     background-color: var(--eighth-color);
@@ -63,12 +74,40 @@ label{
     background-color: var(--third-color)
     
 }
+
+.info-container{
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+}
+.phone,.email,.location{
+display:flex;
+flex-direction: column;
+align-items: center;
+padding: 1em;
+}
+.google-maps-container{
+    display:flex;
+    justify-content: center;
+    margin-block: 3rem;
+}
+
   @keyframes fade-in{
     0%{
      opacity:0;
      transform:translateY(50px);
     }
     
+ }
+
+ @media(min-width:844px){
+    .info-container{
+        display:flex;
+        flex-direction: row;
+        align-items: center;
+    }
  }
 
 
