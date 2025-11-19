@@ -1,58 +1,81 @@
 const navMenu=document.querySelector('.menu-is-closed');
 const hamburgerBtn=document.querySelector('.hamburder-btn');
-// const body=document.querySelector('body');
+
+
+
 hamburgerBtn.addEventListener('click',()=>{
    document.body.classList.toggle('nav-open');
 
-    // navMenu.classList.toggle('menu-is-open');
 
     hamburgerBtn.classList.toggle('open');
 })
 
 
-//for ios
+/*
+ <h2 id="h2Title">Toperi</h2>
+        <p id="p1">za torte</p>
+        <p id="p2">od 5€</p>
+        */
 
-// window.addEventListener('scroll',()=>{
-//     const image=document.querySelector(".parallax-image");
-//     let scrollPosition=window.scrollY;
-//     image.style.transform=`translateY(${scrollPosition*0.3}px)`
-// })
+const h2Title=document.getElementById("h2Title");
+const p1=document.getElementById('p1');
+const p2=document.getElementById('p2');
+const imgSlide=document.getElementById('imgSlide');
+
+setTimeout(()=>{
+h2Title.textContent='Toperi';
   
-//another parallax try:
-document.addEventListener('DOMContentLoaded',()=>{
-    const parallaxElements=document.querySelectorAll('.parallax');
+  h2Title.classList.add('slideFromAbove');
+},1000);
 
-    //define the main scroll function
-    function parallaxScroll(){
-        const scrollTop=window.scrollY;
+setTimeout(()=>{
+    p1.textContent='za torte';
+    p1.classList.add('slideFromLeft');
+},2000);
 
-        //loop through every parallax elemnt found on the page
-        parallaxElements.forEach(element=>{
-            //get the parallax speed value and convert it to a number
-            const speed=parseFloat(element.getAttribute('data-parallax-speed')||0);
-        //calculate the movement distance:
-        //scroll distance *parallax speed
-        //this creates the slower movement of the background.
-        const movement=scrollTop*speed;
+setTimeout(()=>{
+   p2.textContent='od 5€';
+   p2.classList.add('slideFromLeft');
 
-        //apply the movement using css transform(translateY)
-        //the movement is applied negatively to make the background appear
-        //to lag behind the foreground content.
-        element.style.transform=`translate3d(0,${movement}px,0)`
-    })
+    
+},3000);
 
-    }
-//attach the function to the scroll event
-//using requestAnimationFrame ensures smoother animations
-    let ticking=false;
-    window.addEventListener('scroll',()=>{
-        if(!ticking){
-            window.requestAnimationFrame(()=>{
-                parallaxScroll();
-                ticking=false;
-            })
-            ticking=true;
-        }
-    });
-    parallaxScroll();
-});
+
+setTimeout(()=>{
+    h2Title.textContent='';
+    p1.textContent='';
+    p2.textContent='';
+    
+    h2Title.classList.remove('slideFromAbove');
+    p1.classList.remove('slideFromLeft');
+    p2.classList.remove('slideFromLeft');
+
+imgSlide.src='images/key2.png';
+
+
+},3500);
+
+
+setTimeout(()=>{
+h2Title.textContent='Kluce';
+h2Title.classList.add('slideFromAbove');
+    
+
+
+},4000)
+
+setTimeout(()=>{
+    p1.textContent='za svaki';
+    p1.classList.add('slideFromLeft');
+        
+    
+    
+    },5000);
+
+    setTimeout(()=>{
+        p2.textContent='vrata';
+        p2.classList.add('slideFromLeft');
+            
+        
+        
+        },6000);
