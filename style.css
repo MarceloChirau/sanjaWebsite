@@ -112,7 +112,7 @@ ul>li>a{
 .hero-container{
   position:relative;
   width:100vw;
-  height:20vh;
+  height:50vh;
   margin-top: 1rem;
 }
 .img-box{
@@ -121,28 +121,90 @@ ul>li>a{
 }
 .img-box img{
   width:100%;
-  height:auto;
+  height:100%;
   object-fit: cover;
 }
 
 #h2Title{
+  position:absolute;
+  top:0.5em;
   padding-left:0.5em;
 }
 #p1{
+  position:absolute;
+  top:2em;
   padding-left:0.9em;
-  padding-top:0.3em;
+  padding-top:0.4em;
 
 }
 #p2{
-  padding-left:4em;
+  position:absolute;
+  top:3.0em;
+  padding-left:3em;
+  padding-top:0.4em;
+
   color:rgba(0, 0, 0, 0.47);
 
 }
+
+.btns{
+  position:absolute;
+  bottom:1em;
+  padding-left:1em;
+}
+.galleryBtn{
+  border-radius: 12px;
+  padding:5px;
+  background-color:transparent;
+  cursor:pointer;
+
+}
+
+
+.galleryBtn>a{
+  text-decoration: none;
+  color:black;
+}
+.galleryBtn>a:hover{
+  color:rgba(0, 0, 0, 0.671);
+}
+.shopBtn{
+  border-radius: 12px;
+  padding:5px;
+  color:white;
+  border:black 2px solid;
+  background-color:black;
+  cursor:not-allowed;
+}
+.shopBtn::after{
+  content:'Coming soon...';
+  position:absolute;
+  bottom: 120%; /* above the button */
+  /* left: 80%; */
+  transform: translateX(-85%);
+  background: #333;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity:0;
+  transition:opacity 0.3s ease;
+}
+.shopBtn:hover::after{
+  opacity:1
+}
+
+
+.galleryBtn,.shopBtn{
+  animation: slideFromLeft 1s ease;
+}
 .slideFromAbove{
-  animation:slideFromAbove 1s ease;
+  animation:slideFromAbove 1s ease-in-out;
 }
 .slideFromLeft{
-  animation :slideFromLeft 1s ease;
+  animation :slideFromLeft 1s ease-in-out;
 }
 
 /* animations for my hero */
@@ -169,6 +231,8 @@ ul>li>a{
     transform:translateX(0);
   }
 }
+
+
 
 @media(min-width:844px){
   
