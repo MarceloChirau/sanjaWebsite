@@ -296,15 +296,15 @@ padding:2em 1em;
   }
 }
 
-@media(min-width:500px){
+@media(min-width:667px){
   .hero-container{
-    width:60vw;
-    height:40vh;
+    width:100vw;
+    height:60vh;
 margin:0 auto;
   }
 .img-box{
   width:90%;
-  height:90%;
+  height:100%;
 margin:0 auto;
 
 }
