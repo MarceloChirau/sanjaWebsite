@@ -26,7 +26,7 @@ const heroObject=[{
     h2Title:'Toperi',
     p1:'za torte',
     p2:'od 5€',
-    src:'imagesForHero/goodCakeTopper.PNG'
+    src:'imagesForHero/cropped2Topper.png'
 },
 {
     h2Title:'Boceri',
@@ -44,7 +44,7 @@ const heroObject=[{
     h2Title:'Toperi',
     p1:'za torte',
     p2:'od 5€',
-    src:'imagesForHero/heski7.png'
+    src:'imagesForHero/geminiPlaque.png'
 },
 {
     h2Title:'Toperi',
@@ -74,7 +74,7 @@ const heroObject=[{
     h2Title:'Toperi',
     p1:'za torte',
     p2:'od 5€',
-    src:'imagesForHero/yellowSign.jpeg'
+    src:'imagesForHero/geminiYellowSign.png'
 }
 
 
