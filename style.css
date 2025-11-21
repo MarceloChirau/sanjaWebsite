@@ -364,6 +364,12 @@ padding:0 10px;
   }
 
 
+
+
+
+
+
+
   .ourStoryContainer{
     width:100vw;
     height:30vh;
@@ -390,4 +396,21 @@ padding:0 10px;
   
   
   
+}
+
+@media(min-width:932px){
+  .hero-container{
+  width:90vw;
+  height:60vh;
+  }
+  .img-box{
+    width:100%;
+    height:100%;
+
+  }
+  .img-box img{
+    width:100%;
+    height:100;
+    object-fit: contain;
+  }
 }
