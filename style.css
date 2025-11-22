@@ -6,7 +6,7 @@
 }
 :root{
   --menu-width:20vw;
-    --primary-color:rgb#5D100A;
+    --primary-color:#5D100A;
     --secondary-color:#842A3B;
     --third-color:#A3485A;
     --fourth-color:#F5DAA7;
@@ -125,28 +125,30 @@ ul>li>a{
 .img-box img{
   width:100%;
   height:100%;
-  object-fit: cover;
+  object-fit: contain;
   background-color:transparent;
 }
 
 #h2Title{
   position:absolute;
-  top:0.5em;
+  top:1.5em;
   padding-left:0.5em;
   font-size: 3em;
+  color:var(--primary-color)
 }
 #p1{
   position:absolute;
-  top:2em;
+  top:3.5em;
   padding-left:0.9em;
   padding-top:0.4em;
   font-size: 2em;
+  color:var(--secondary-color)
   
 
 }
 #p2{
   position:absolute;
-  top:3.0em;
+  top:4.5em;
   padding-left:3em;
   padding-top:0.4em;
   font-size: 2em;
@@ -157,7 +159,7 @@ ul>li>a{
 
 .btns{
   position:absolute;
-  bottom:1em;
+  bottom:5em;
   padding-left:1em;
 }
 .galleryBtn{
@@ -171,7 +173,8 @@ ul>li>a{
 
 .galleryBtn>a{
   text-decoration: none;
-  color:black;
+  color:var(--third-color);
+
 }
 .galleryBtn>a:hover{
   color:rgba(0, 0, 0, 0.671);
@@ -229,6 +232,9 @@ ul>li>a{
   display:column;
   padding:1rem;
 }
+.whatWeDoBox h3{
+  color:var(--secondary-color)
+}
 
 .ourStoryContainer{
   width:100vw;
@@ -260,6 +266,7 @@ padding:2em 1em;
 }
 .ourStoryDescription>h4{
   font-size: 2rem;
+  color:var(--secondary-color)
 }
 .ourStoryDescription>button{
   margin-block:1em;
@@ -268,7 +275,43 @@ padding:2em 1em;
   border:1px solid;
   background-color: transparent;
   cursor: pointer;
+  color:var(--third-color)
 }
+
+/* here i start to show my products in html.index */
+
+.products-container{
+  display:flex;
+  text-align: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  gap:2em;
+}
+ h5{
+  text-align: center;
+  margin-block: 1rem;
+  font-size: 1.5rem;
+  color:var(--secondary-color)
+}
+.small-img{
+width:100px;
+height:100px;
+}
+.small-img img{
+  width:100%;
+  height:100%;
+}
+
+.big-img{
+width:110px;
+height:120px;
+}
+.big-img img{
+  width:100%;
+  height:100%;
+}
+
+
 
 
 /* animations for my hero */
@@ -296,26 +339,7 @@ padding:2em 1em;
   }
 }
 
-@media(min-width:667px){
-  .hero-container{
-    width:100vw;
-    height:60vh;
-margin:0 auto;
-  }
-.img-box{
-  width:90%;
-  height:100%;
-margin:0 auto;
 
-}
-
-.img-box img{
-  width:100%;
-  height:100%;
-  object-fit: contain;
-}
-
-}
 
 @media(min-width:844px){
   
@@ -394,10 +418,16 @@ padding:0 10px;
 }
 
 
+ 
+/* here i test for hero container on new carousel img */
+  
 .hero-container{
-  width:90vw;
-  height:60vh;
-  }
+  width:100vw;
+  height:110vh;
+  margin:0 auto;
+  text-align: center;
+  background-color:#E9E9E9 ;
+}
   .img-box{
     width:100%;
     height:100%;
@@ -405,16 +435,138 @@ padding:0 10px;
   }
   .img-box img{
     width:100%;
-    height:100;
-    object-fit: contain;
+    height:100%;
+    object-fit: cover;
   }
 
+/* repositioning the h2title and p */
+#h2Title{
+  position:absolute;
+  top:0.5em;
+  padding-left:0.5em;
+  font-size: 3em;
+}
+#p1{
+  position:absolute;
+  top:2em;
+  padding-left:0.9em;
+  padding-top:0.4em;
+  font-size: 2em;
   
-  
-  
+
+}
+#p2{
+  position:absolute;
+  top:3em;
+  padding-left:3em;
+  padding-top:0.4em;
+  font-size: 2em;
+
+  color:rgba(0, 0, 0, 0.47);
+
+}
+/* rearranging the buttons */
+.btns{
+  position:absolute;
+  bottom:3em;
+  padding-left:2em;
+  padding-right:2em;
+}
+.galleryBtn,.shopBtn{
+  width:8rem;
+  height:2rem;
+  font-size: 1.1em;
 }
 
-@media(min-width:932px){
+.galleryBtn{
+  margin-right:1em;
+}
+/* adjusting also the img sizes in products section when iphone on horizontal mode */
+
+.small-img{
+  width:200px;
+  height:200px;
+}
+.big-img{
+  width:220px;
+  height:250px;
+}
+
+
+}
+
+
+
+
+@media(min-width:1440px){
+.logo-image{
+  font-size: 1.5em;
+}
+.menu-is-closed>ul>li>a{
+  font-size: 1.5em;
+}
+
+
+
+
+
+  #h2Title{
+    position:absolute;
+    top:0.5em;
+    padding-left:0.5em;
+    font-size: 10em;
+  }
+  #p1{
+    position:absolute;
+    top:2em;
+    padding-left:0.9em;
+    padding-top:0.4em;
+    font-size: 6em;
+    
+  
+  }
+  #p2{
+    position:absolute;
+    top:3em;
+    padding-left:3em;
+    padding-top:0.4em;
+    font-size: 6em;
+  
+    color:rgba(0, 0, 0, 0.47);
+  
+  }
+  /* rearranging the buttons */
+  .btns{
+    position:absolute;
+    bottom:3em;
+    padding-left:5em;
+  }
+  .whatWeDoBox{
+    font-size: 1.5em;
+  }
+  .whatWeDoBox img{
+    width:2em;
+    height:auto;
+  }
+
+  .small-img{
+    width:250px;
+    height:250px;
+  }
+  .big-img{
+    width:300px;
+    height:350px;
+  }
+  h5{
+    margin:5rem auto;
+  font-size: 2.5rem;
+
+  }
+}
+
+
+/* i commenting this out to check the above code */
+/* @media(min-width:932px){
   .hero-container{
   width:90vw;
   height:60vh;
@@ -429,4 +581,4 @@ padding:0 10px;
     height:100;
     object-fit: contain;
   }
-}
+} */
