@@ -30,16 +30,35 @@
   }
  
 
-
-.form-container{
+/* this was my original code */
+/* .form-container{
     width:100vw;
    max-width:90%;
     height:50%;
     padding:10em 2em ;
     margin:4rem auto;
     background-color: var(--tenth-color);
+
     
+} */
+
+/* this is where i test the google form */
+
+.form-container{
+  width:100vw;
+ max-width:90%;
+  height:50%;
+  padding:1em 2em ;
+  margin:2rem auto;
+  background-color: var(--tenth-color);
+  overflow: hidden;
+  text-align: center;
+  display:flex;
+
+  
 }
+
+
 .form{
     display:flex;
     flex-direction:column;
@@ -108,6 +127,23 @@ padding: 1em;
         flex-direction: row;
         align-items: center;
     }
+
+/* code for google form */
+
+.form-container{
+  width:100vw;
+ max-width:90%;
+  height:50%;
+  padding:1em 2em ;
+  margin:2rem auto;
+  background-color: var(--tenth-color);
+  overflow: hidden;
+  text-align: center;
+  display:flex;
+justify-content: center;
+  
+}
+
  }
 
 
