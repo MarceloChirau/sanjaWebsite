@@ -1,0 +1,30 @@
+
+
+
+
+
+
+.signs-container{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+.sign-img{
+    width:180px;
+    height:auto;
+    padding-bottom: 0.5em;
+}
+.sign-img img{
+    width:100%;
+    height:auto;
+}
+
+@media(min-width:844px){
+    .sign-img{
+        width:400px;
+        height:auto;
+padding-bottom:4em
+    }
+    
+}

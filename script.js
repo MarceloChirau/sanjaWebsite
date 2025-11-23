@@ -21,6 +21,10 @@ const h2Title=document.getElementById("h2Title");
 const p1=document.getElementById('p1');
 const p2=document.getElementById('p2');
 const imgSlide=document.getElementById('imgSlide');
+//year for the copyright:
+document.getElementById('year').textContent=new Date().getFullYear();
+
+
 
 const heroObject=[{
     h2Title:'Toperi',
