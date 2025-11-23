@@ -338,10 +338,18 @@ height:120px;
     transform:translateX(0);
   }
 }
+/* for iphone SE */
+@media(max-width:375px){
+  .ourStoryContainer{
+    margin-block:7rem;
+  }
+}
 
 
 
-@media(min-width:844px){
+
+/* min-width:844px */
+@media(orientation:landscape){
   
 
   .hamburder-btn{
@@ -387,13 +395,6 @@ padding:0 10px;
     justify-content: space-evenly;
   }
 
-
-
-
-
-
-
-
   .ourStoryContainer{
     width:100vw;
     height:50vh;
@@ -423,7 +424,7 @@ padding:0 10px;
   
 .hero-container{
   width:100vw;
-  height:110vh;
+  height:100vh;
   margin:0 auto;
   text-align: center;
   background-color:#E9E9E9 ;

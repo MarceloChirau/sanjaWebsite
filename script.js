@@ -26,55 +26,55 @@ const heroObject=[{
     h2Title:'Toperi',
     p1:'za torte',
     p2:'od 5€',
-    src:'imagesForHero/cropped2Topper.png'
+    src:'imagesForHero/carousel2.jpeg'
 },
 {
     h2Title:'Boceri',
     p1:'za rakja',
     p2:'od 5€',
-    src:'imagesForHero/boca1.jpeg'
+    src:'imagesForHero/carousel1.jpeg'
 },
 {
     h2Title:'Etickete',
     p1:'za spomene',
     p2:'od 5€',
-    src:'imagesForHero/groblje6.jpeg'
+    src:'imagesForHero/carousel3.jpeg'
 },
 {
     h2Title:'Toperi',
     p1:'za torte',
     p2:'od 5€',
-    src:'imagesForHero/geminiPlaque.png'
+    src:'imagesForHero/carousel4.jpeg'
 },
 {
     h2Title:'Toperi',
     p1:'za torte',
     p2:'od 5€',
-    src:'imagesForHero/key2.png'
+    src:'imagesForHero/carousel5.jpeg'
 },
 {
     h2Title:'Toperi',
     p1:'za torte',
     p2:'od 5€',
-    src:'imagesForHero/stamps.png'
+    src:'imagesForHero/carousel6.jpeg'
 },
 {
     h2Title:'Toperi',
     p1:'za torte',
     p2:'od 5€',
-    src:'imagesForHero/trophy.jpeg'
+    src:'imagesForHero/carousel7.jpeg'
 },
 {
     h2Title:'Toperi',
     p1:'za torte',
     p2:'od 5€',
-    src:'imagesForHero/woodHeart.jpeg'
+    src:'imagesForHero/carousel8.jpeg'
 },
 {
     h2Title:'Toperi',
     p1:'za torte',
     p2:'od 5€',
-    src:'imagesForHero/geminiYellowSign.png'
+    src:'imagesForHero/carousel9.jpeg'
 }
 
 
