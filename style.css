@@ -17,7 +17,11 @@
     --tenth-color:#FBE4E4;
 
 }
-
+@font-face{
+  font-family: 'champagne';
+  src:url("fontChampagne/ChampagneLimousines.ttf");
+  font-weight:normal;
+}
 body{
   transition:transform 0.3s ease-out;
   overflow-x: hidden;
@@ -134,7 +138,8 @@ ul>li>a{
   top:1.5em;
   padding-left:0.5em;
   font-size: 3em;
-  color:var(--primary-color)
+  color:var(--primary-color);
+  font-family:"champagne";
 }
 #p1{
   position:absolute;
@@ -142,7 +147,9 @@ ul>li>a{
   padding-left:0.9em;
   padding-top:0.4em;
   font-size: 2em;
-  color:var(--secondary-color)
+  color:var(--secondary-color);
+  font-family: 'champagne';
+
   
 
 }
@@ -154,6 +161,7 @@ ul>li>a{
   font-size: 2em;
 
   color:rgba(0, 0, 0, 0.47);
+  font-family: 'champagne';
 
 }
 
@@ -233,7 +241,13 @@ ul>li>a{
   padding:1rem;
 }
 .whatWeDoBox h3{
-  color:var(--secondary-color)
+  color:var(--secondary-color);
+  font-family: 'champagne';
+
+}
+.whatWeDoBox p{
+  font-family: 'champagne';
+
 }
 
 .ourStoryContainer{
@@ -266,7 +280,9 @@ padding: 1em;
 }
 .ourStoryDescription>h4{
   font-size: 2rem;
-  color:var(--secondary-color)
+  color:var(--secondary-color);
+  font-family: 'champagne';
+
 }
 .ourStoryDescription>button{
   margin-block:1em;
@@ -275,7 +291,8 @@ padding: 1em;
   border:1px solid;
   background-color: transparent;
   cursor: pointer;
-  color:var(--third-color)
+  color:var(--third-color);
+
 }
 
 /* here i start to show my products in html.index */
@@ -291,7 +308,9 @@ padding: 1em;
   text-align: center;
   margin-block: 1rem;
   font-size: 1.5rem;
-  color:var(--secondary-color)
+  color:var(--secondary-color);
+  font-family: 'champagne';
+
 }
 .small-img{
 width:100px;
@@ -341,6 +360,7 @@ border:1px solid var(--third-color);
   color:white;
   text-decoration: none;
   font-size: 1.2em;
+
 }
 
 
