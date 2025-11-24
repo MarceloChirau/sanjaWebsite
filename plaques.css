@@ -1,0 +1,23 @@
+.plaques-container{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+.plaques-img{
+    width:180px;
+    height:auto;
+    padding-bottom: 0.5em;
+}
+.plaques-img img{
+    width:100%;
+    height:auto;
+}
+@media(min-width:844px){
+    .plaques-img{
+        width:400px;
+        height:auto;
+padding-bottom:4em
+    }
+    
+}
