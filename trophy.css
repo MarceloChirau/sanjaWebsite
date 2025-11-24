@@ -1,0 +1,24 @@
+.trophy-container{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+.trophy-img{
+    width:180px;
+    height:auto;
+    padding-bottom: 0.5em;
+}
+.trophy-img img{
+    width:100%;
+    height:auto;
+}
+
+@media(min-width:844px){
+    .trophy-img{
+        width:400px;
+        height:auto;
+padding-bottom:4em
+    }
+    
+}
