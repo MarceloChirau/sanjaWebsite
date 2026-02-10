@@ -4,34 +4,47 @@
 
 }
 
-.stamp-container{
+
+.stamps-container,.hero-container{
     display:flex;
     flex-direction: column;
+    align-items: center;
+    margin-block:0 1rem;
 }
-.img-box{
+
+.hero-stamp{
     width:100vw;
     height:auto;
-    margin-bottom: 2rem;
 }
 .hero-stamp>img{
     width:100%;
-    height:auto;
+    height:100%;
 }
-.parallax{
-    display: block;
-    width:70%;
-    height:506.2px;
-    position:static;
-    background-image: url('stamp-Images/stamp-office.jpg');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    background-attachment: scroll;
-    /* transition: transform 0.8s ease; */
-    transform:translate(0px,58.2px);
-    margin:0 auto;
+
+.product-box{
+    width:300px;
+    height:auto;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    margin-block: 0.6rem;
+    border:2px solid black;
+    border-radius:20px;
+    padding:1em;
 
 }
+.img-box{
+    width:180px;
+    height:auto;
+
+}
+.img-box>img{
+    width:100%;
+    height:100%;
+    border-radius:20px;
+
+}
+
 
 .team-stamps{
     display:flex;
@@ -50,6 +63,11 @@
 .img-box-stamps>img{
     width:100%;
     height:auto;
+}
+ul>.advantageList{
+    color:black;
+  list-style-type: bullets;
+    
 }
 
 

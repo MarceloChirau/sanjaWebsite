@@ -1,0 +1,62 @@
+[
+    
+        {
+          "type": "Štambilj automat", 
+          "price": 24.80,
+          "image": "./images/stampsToUse/ai-product-shot-custom_bg2.jpeg",
+          "description":"Standardni pečat za poslovne subjekte. Osigurajte profesionalnost i pravnu valjanost svoje dokumentacije uz naš standardni pečat. Idealan je za svakodnevnu upotrebu u uredima. Dugotrajan i jednostavan za rukovanje",
+          "advantages":[
+            "Namjena: Za d.o.o., j.d.o.o., obrte i udruge.",
+            "Kvaliteta: Precizan i kvalitetan otisak svaki put.",
+            "Prilagodba: Izrada prema vašim podacima (naziv, vlasnik, adresa, OIB)."
+        ]
+
+
+        },
+        {
+            "type": "Okrugli pečat-Tradicija i identitet",
+            "price": 29.80,
+            "image": "./images/stampsToUse/ai-product-shot-custom_bg6.jpeg",
+            "description":"Istaknite vizualni identitet svoje organizacije uz naš okrugli pečat. Ovaj format je najčešći izbor za udruge, sportske klubove i neprofitne organizacije jer omogućuje postavljanje logotipa u središte, stvarajući upečatljiv i autoritativan dojam na svakom dokumentu.",
+            "advantages":[
+                "Dizajn: Savršen za logotipe i kružni tekst.",
+                "Namjena: Udruge, sportski klubovi, savezi i specifični poslovni subjekti.",
+                "Izdržljivost: Visokokvalitetni mehanizam za tisuće preciznih otisaka."
+            ]
+          },
+        {
+          "type": "Pečat za ovjeru",
+          "price": 32.90,
+          "image": "./images/stampsToUse/ai-product-shot-custom_bg6.jpeg",
+          "description":"Službena potvrda vaših dokumenata.Osigurajte maksimalnu vjerodostojnost svojim kopijama, ugovorima i izjavama. Naš pečat za ovjeru dizajniran je kako bi jasno istaknuo da je dokument pregledan i potvrđen od strane ovlaštene osobe. Nezaobilazan je alat za javne bilježnike, odvjetnike, sudske tumače i administrativne odjele.",
+          "advantages":[
+            "Jasnoća: Čitljiv tekst koji ne ostavlja prostor za sumnju u autentičnost.",
+        "Standardizacija: Sadrži sve potrebne elemente poput teksta 'OVJERAVA SE', prostora za potpis i datum.",
+        "Kvaliteta: Dugotrajan mehanizam prilagođen čestoj uporabi."
+        ]
+        },
+        {
+          "type": "Štambilj datumar mini",
+          "price": 9.90,
+          "image": "./images/stampsToUse/ai-product-shot-custom_bg3.jpeg",
+          "description":"Ubrzajte svoje administrativne procese uz kompaktni mini datumar. Idealan je za označavanje datuma primitka robe, pošte ili ovjeru jamstvenih listova. Zbog svojih malih dimenzija, savršeno stane u svaki džep ili prenatrpani uredski ladičar.",
+          "advantages":[
+            "Podesivost: Jednostavna promjena datuma pomoću okretnih kotačića.",
+        "Kompaktnost: Minimalni otisak koji ne prekriva važne informacije na dokumentu.",
+        "Primjena: Skladišta, trgovine, ljekarne i uredska administracija."
+        ]
+        },
+        
+        {
+          "type": "Prijemni pečat",
+          "price": 29.80,
+          "image": "./images/stampsToUse/ai-product-shot-custom_bg4.jpeg",
+          "description":"Potpuna kontrola ulazne dokumentacije Standardizirajte obradu pošte i dokumenata uz naš robusni prijemni pečat. Dizajniran je da na jednom mjestu prikaže sve ključne informacije: datum primitka, evidencijski broj (urudžbeni broj) i naziv organizacijske jedinice. Nezaobilazan je alat za svaku pisarnicu, tajništvo ili računovodstvo.",
+          "advantages":[
+            "Preglednost: Jasno definirana polja za ručni upis klasifikacijskih oznaka.",
+        "Efikasnost: Ubrzava proces urudžbiranja i smanjuje mogućnost pogreške.",
+        "Prilagodba: Mogućnost izrade s fiksnim tekstom 'PRIMLJENO' i prostorom za datum i klasu."
+        ]
+        }
+      
+]

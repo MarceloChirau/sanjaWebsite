@@ -30,55 +30,55 @@ const heroObject=[{
     h2Title:'Toperi',
     p1:'za torte',
     p2:'od 5€',
-    src:'imagesForHero/carousel2.jpeg'
+    src:'/images/imagesForHero/carousel2.jpeg'
 },
 {
     h2Title:'Boceri',
     p1:'za rakja',
     p2:'od 5€',
-    src:'imagesForHero/carousel1.jpeg'
+    src:'/images/imagesForHero/carousel1.jpeg'
 },
 {
     h2Title:'Etickete',
     p1:'za spomene',
     p2:'od 5€',
-    src:'imagesForHero/carousel3.jpeg'
+    src:'/images/imagesForHero/carousel3.jpeg'
 },
 {
     h2Title:'Toperi',
     p1:'za torte',
     p2:'od 5€',
-    src:'imagesForHero/carousel4.jpeg'
+    src:'/images/imagesForHero/carousel4.jpeg'
 },
 {
     h2Title:'Toperi',
     p1:'za torte',
     p2:'od 5€',
-    src:'imagesForHero/carousel5.jpeg'
+    src:'/images/imagesForHero/carousel5.jpeg'
 },
 {
     h2Title:'Toperi',
     p1:'za torte',
     p2:'od 5€',
-    src:'imagesForHero/carousel6.jpeg'
+    src:'/images/imagesForHero/carousel6.jpeg'
 },
 {
     h2Title:'Toperi',
     p1:'za torte',
     p2:'od 5€',
-    src:'imagesForHero/carousel7.jpeg'
+    src:'/images/imagesForHero/carousel7.jpeg'
 },
 {
     h2Title:'Toperi',
     p1:'za torte',
     p2:'od 5€',
-    src:'imagesForHero/carousel8.jpeg'
+    src:'/images/imagesForHero/carousel8.jpeg'
 },
 {
     h2Title:'Toperi',
     p1:'za torte',
     p2:'od 5€',
-    src:'imagesForHero/carousel9.jpeg'
+    src:'/images/imagesForHero/carousel9.jpeg'
 }
 
 
