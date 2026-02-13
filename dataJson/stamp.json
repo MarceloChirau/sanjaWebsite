@@ -1,6 +1,6 @@
 [
     
-        {
+        {"productType":"stamp",
           "type": "Štambilj automat", 
           "price": 24.80,
           "image": "./images/stampsToUse/ai-product-shot-custom_bg2.jpeg",
@@ -13,7 +13,7 @@
 
 
         },
-        {
+        {"productType":"stamp",
             "type": "Okrugli pečat-Tradicija i identitet",
             "price": 29.80,
             "image": "./images/stampsToUse/ai-product-shot-custom_bg6.jpeg",
@@ -24,7 +24,7 @@
                 "Izdržljivost: Visokokvalitetni mehanizam za tisuće preciznih otisaka."
             ]
           },
-        {
+        {"productType":"stamp",
           "type": "Pečat za ovjeru",
           "price": 32.90,
           "image": "./images/stampsToUse/ai-product-shot-custom_bg6.jpeg",
@@ -35,7 +35,7 @@
         "Kvaliteta: Dugotrajan mehanizam prilagođen čestoj uporabi."
         ]
         },
-        {
+        {"productType":"stamp",
           "type": "Štambilj datumar mini",
           "price": 9.90,
           "image": "./images/stampsToUse/ai-product-shot-custom_bg3.jpeg",
@@ -47,7 +47,7 @@
         ]
         },
         
-        {
+        {"productType":"stamp",
           "type": "Prijemni pečat",
           "price": 29.80,
           "image": "./images/stampsToUse/ai-product-shot-custom_bg4.jpeg",

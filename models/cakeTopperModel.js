@@ -1,7 +1,6 @@
 const mongoose=require('mongoose');
 
-const stampSchema=new mongoose.Schema({
-    productType:{type:String},
+const cakeTopperSchema=new mongoose.Schema({
     type:{
         type:String,
         enum:['Štambilj automat', 
@@ -12,6 +11,7 @@ const stampSchema=new mongoose.Schema({
         ],
         required:[true,'There should be a type for every stamp']
     },
+    productType:String,
     price:{
         type:Number,
         required:[true,'Please add a price']
@@ -29,5 +29,5 @@ const stampSchema=new mongoose.Schema({
     }
 });
 
-const Stamp=mongoose.model('Stamp',stampSchema);
-module.exports=Stamp;
+const CakeTopper=mongoose.model('CakeTopper',cakeTopperSchema);
+module.exports=CakeTopper;

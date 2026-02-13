@@ -16,7 +16,11 @@
   
   }
   
-  
+  #cartImage{
+    font-size: 1.3em;
+  }
+
+
 .container{
     display:flex;
 flex-direction: column;
