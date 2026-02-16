@@ -24,7 +24,10 @@ if(!response.ok){
 }else{
     const data=result.data;
     console.log('Data:',data);
-const items=data.items;
+    const items=data.items;
+    console.log('Object.keys(items[0]):',Object.keys(items[0]));
+    const bussinessFile=Object.keys(items[0]).includes('bussinessFile');
+    console.log('bussinessFile:',bussinessFile);
 //if there is some producta in the cart
 if(items.length>0){
     const regex=/(\w+\:)/g;
@@ -42,8 +45,10 @@ ${item.advantages.map(advantage=>
     `<li class="advantageList">${advantage.replace(regex,match=>`<strong class="strongLists">${match}</strong>`)}</li>`
 ).join('')}
     </ul>
+   
 <p id='pQuantity'><strong>Quantity:</strong><span class='quantity'>${item.quantity}</span></p>
     <p class="priceStamp">Price:${item.price}€</p>
+    ${item.bussinessFile ? ` <p class="priceStamp">Your Bussiness Info:</p><div class="img-box"><img src="${item.bussinessFile}"></div>` : null}
     <button class="AddBtn">Add more</button>
     <button class="ReduceBtn">Reduce</button>
     <button class="RemoveBtn">Remove</button>
@@ -58,7 +63,7 @@ ${item.advantages.map(advantage=>
 cartContainer.insertAdjacentHTML('beforeend',html);
 
 totalProducts.innerText=`${data.totalProducts}`
-totalAmount.innerText=`${data.totalAmount}€`;
+totalAmount.innerText=`${data.totalAmount.toFixed(2)}€`;
 totals.insertAdjacentHTML('beforeend',checkout);
 
 }
@@ -69,6 +74,9 @@ totals.insertAdjacentHTML('beforeend',checkout);
 ///////////////////////
 
 cartContainer.addEventListener('click',async(e)=>{
+
+
+ ////////////////////////////////////////////////////////////   
     if(e.target.classList.contains('AddBtn')){
         //userId,productId,productType
         const productCard=e.target.closest('.product-box');
@@ -96,7 +104,7 @@ if(!response.ok)alert(`ERROR:${result.message}`)
     }
 
     totalProducts.innerText=`Number of Products:${data.totalProducts}`
-totalAmount.innerText=`Total Amount:${data.totalAmount}`;
+totalAmount.innerText=`Total Amount:${data.totalAmount.toFixed(2)}`;
     }else if(e.target.classList.contains('ReduceBtn')){
 
         const productCard=e.target.closest('.product-box');
@@ -125,7 +133,7 @@ const data=result.data;
     }
 
     totalProducts.innerText=`${data.totalProducts}`
-totalAmount.innerText=`${data.totalAmount}€`;
+totalAmount.innerText=`${data.totalAmount.toFixed(2)}€`;
 
     }else if(e.target.classList.contains('RemoveBtn')){
 ///////////////////////////////////////////
@@ -153,7 +161,7 @@ const data=result.data;
     }
 
     totalProducts.innerText=`${data.totalProducts}`
-totalAmount.innerText=`${data.totalAmount}€`;
+totalAmount.innerText=`${data.totalAmount.toFixed(2)}€`;
 
 
 

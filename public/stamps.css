@@ -150,6 +150,11 @@ ul>.advantageList{
     border:1px solid var(--primary-color);
 
 }
+.stampBtn:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    opacity: 0.5;
+}
 @media(min-width:846px){
     
     

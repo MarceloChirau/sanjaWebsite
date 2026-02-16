@@ -21,7 +21,6 @@ if(!response.ok){
     alert(`ERROR:${result.message}`)
 }
 const data=result.data;
-
 // console.log('DATA:',data);
 const regex=/(\w+\:)/g;
 const html=data.map(item=>{
@@ -37,9 +36,10 @@ ${item.advantages.map(advantage=>
     `<li class="advantageList">${advantage.replace(regex,match=>`<strong>${match}</strong>`)}</li>`
 ).join('')}
     </ul>
-
+ ${(item.productType==="stamp" && item.type==="Štambilj automat") ?
+         `<form  id="formBussinessInfo" enctype="multipart/form-data"><label class="formLabel">Please upload here your Bussiness ID:</label><input type="file" id="business-file-input" accept=".jpg,.jpeg,.png,.pdf" name="bussinessInfo" required/> </form>` : ""}
     <p class="priceStamp">Price:${item.price}€</p>
-    <button class="stampBtn">Add to cart</button>
+<button class="stampBtn" ${(item.productType==="stamp" && item.type==="Štambilj automat") ? "disabled" : ""} >Add to cart</button>
     </div>
     
     `
@@ -53,43 +53,70 @@ stampsContainer.insertAdjacentHTML('beforeend',html)
         console.log(`ERROR:, ${err.message}`)
     }
 })
+///////////////////////////
+//for the add to cart in case is automat stambilj
+stampsContainer.addEventListener('change',(e)=>{
+    if(e.target.id==='business-file-input'){
+        const productCard=e.target.closest('.product-box');
+        const addBtn=productCard.querySelector('.stampBtn');
+        if(e.target.files.length>0){
+            addBtn.disabled=false;
+        }else{
+            addBtn.disabled=true;
+        }
+    }
+})
+
+
+
 
 ///////////////////////
 //event delegation:
 stampsContainer.addEventListener('click',async(e)=>{
-if(e.target.classList.contains('stampBtn')){
-    // console.log(e.target.contains('stampBtn'))
-    const productCard=e.target.closest('.product-box');
-    const productId=productCard.dataset.productid;
-    const productType=productCard.dataset.producttype;
-    // const userId=localStorage.getItem('userId');
-let userId;
-    // console.log('userId:',userId);
+    const formBussinessInfo=document.querySelector('#formBussinessInfo');
+    console.log('formBussinessInfo:',formBussinessInfo);
+    
+    
+    if(e.target.classList.contains('stampBtn') && formBussinessInfo  ){
+        
+const productCard=e.target.closest('.product-box');
+const productId=productCard.dataset.productid;
+const productType=productCard.dataset.producttype;
+const inputFile=productCard.querySelector('#business-file-input');
+let userId=currentUser
 
-    console.log("productCard",productCard);
+// If the input exists but has no file (extra safety check)
+if (inputFile && inputFile.files.length === 0) {
+    alert("Please upload your Business ID first!");
+    return;
+}
 
 
+    const formData=new FormData();
+    formData.append('bussinessInfo',inputFile.files[0]);
+formData.append('productId',productId);
+formData.append('productType',productType);
+formData.append('userId',currentUser)
 
     const response=await fetch('/api/v1/cart',{
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({productId,productType,userId:currentUser})
+        method:"POST",
+        body:formData
     })
+    const result=await response.json();
+    if(!response.ok){
+        alert(`ERROR:${result.message}`)
+    }else{
+const data=result.data;
+console.log('data:',data)
+        alert("File is uploaded successfully and product added to the cart!")
+        if(data.items.length>0){
+            cartImage.classList.add('animate__animated', 'animate__bounce','animate__infinite','animate__slower');
+            cartImage.style.backgroundColor='red';
+        }
 
-const result=await response.json();
-if(!response.ok){
-    alert(`ERROR: ${result.message}`)
-}else{
-    const data=result.data;
-    console.log('data:',data)
-if(data.items.length>0){
-    cartImage.classList.add('animate__animated', 'animate__bounce','animate__infinite','animate__slower');
-    cartImage.style.backgroundColor='red';
+        
+    }
+
 }
 
-
-    alert(`Product added to cart!`)
-}
-
-}
-})
+ })

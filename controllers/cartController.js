@@ -2,8 +2,10 @@ const Cart=require('../models/cartModel');
 const Stamp=require('../models/stampModel');
 const Award = require('../models/awardModel');
 const CakeTopper = require('../models/cakeTopperModel');
+const multer=require('multer');
+const AppError=require('../utils/AppError')
 
-exports.createCart=async(req,res)=>{
+exports.createCart=async(req,res,next)=>{
 try{
 
 
@@ -11,8 +13,9 @@ try{
     //we created the userId once user is navigating our site,productId is the id of the product and producType is to know what type is 
     // productType should be: 'stampId', 'awardId', or 'cakeTopperId'
     const {userId,productId,productType}=req.body;
-    
-    // console.log('userId:',userId,'productId:',productId,'productType:',productType)
+    const myFile=req.file;
+    console.log('My file:',myFile);
+    console.log('userId:',userId,'productId:',productId,'productType:',productType)
 
 let product;
     switch(productType){
@@ -45,26 +48,60 @@ const price=product.price;
     let cart=await Cart.findOne({userId});
     //if there isnt then we will create one
     if(!cart){
-  
-        cart=await Cart.create({
-            //by using the userId we initially created, and in the items category: we add all the below
-            userId,
-            items:[
+  /////////////////////////////////////////////////
+//cart doesnt exist but the product is automat stambilj:
+if(product.type==='Štambilj automat'){
+    try{
+     if(!myFile)return next(new AppError('Please upload the bussiness info file'),400,err);
+     const newCart=await Cart.create({
+        userId,
+        items:[
 
-                {    productId,
-                    productType,
-                    type:product.type,
-                    quantity:1,
-                    image:product.image,
-                    description:product.description,
-                    advantages:product.advantages, //might be a problem , i might have to put it in an array
-                    price
-                }
-            ],
-            totalProducts:1,
-            totalAmount:price
-        });
-       return res.status(201).json({status:'success',data:cart})
+            {    productId,
+                productType,
+                type:product.type,
+                quantity:1,
+                image:product.image,
+                description:product.description,
+                advantages:product.advantages, //might be a problem , i might have to put it in an array
+                bussinessFile:myFile.path,
+                price
+            }
+        ],
+        totalProducts:1,
+        totalAmount:price
+     });
+     res.status(201).json({data:newCart})
+    }catch(err){
+        res.status(500).json({ message: err.message });
+    }
+}else{
+
+////////////////////////////////////////////////////////
+//cart doesnt exist and the product is not automat stambilji
+cart=await Cart.create({
+    //by using the userId we initially created, and in the items category: we add all the below
+    userId,
+    items:[
+
+        {    productId,
+            productType,
+            type:product.type,
+            quantity:1,
+            image:product.image,
+            description:product.description,
+            advantages:product.advantages, //might be a problem , i might have to put it in an array
+            price
+        }
+    ],
+    totalProducts:1,
+    totalAmount:price
+});
+return res.status(201).json({status:'success',data:cart})
+
+
+}
+
     }else{
 
         //so here the user already exist and he has some staff in his cart

@@ -26,6 +26,14 @@ const stampSchema=new mongoose.Schema({
     image:{
         type:String,
         required:[true,'Please add a picture']
+    },
+    bussinessFile:{
+        type:String,
+        required:[function(){
+            return this.type==='Štambilj automat'
+        },
+    'You must upload a picture with your business info for this stamp type!'
+        ]
     }
 });
 

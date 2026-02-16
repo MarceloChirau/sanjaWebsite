@@ -15,6 +15,7 @@ const cartSchema=new mongoose.Schema({
             image:{type:String},
             description:{type:String},
             advantages:{type:[String]},
+            bussinessFile:{type:String},
             price:{type:Number}
         }
 
