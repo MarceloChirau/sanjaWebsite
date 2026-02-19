@@ -30,7 +30,7 @@ if(err.isOperational){
             default:
                 message = `Upload error: ${err.code}`;
         }
-        res.status(statusCode).json({
+       return res.status(statusCode).json({
             status:'error',
             message:message
         })
@@ -45,7 +45,7 @@ if (err.name === 'ValidationError') {
 //programming errors:
  else{
     console.error('ERROR:',err);
-    res.status(500).json({
+  return  res.status(500).json({
         status:'error',
         message:'Something went wrong'
     })

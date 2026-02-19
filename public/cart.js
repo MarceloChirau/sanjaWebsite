@@ -25,9 +25,12 @@ if(!response.ok){
     const data=result.data;
     console.log('Data:',data);
     const items=data.items;
-    console.log('Object.keys(items[0]):',Object.keys(items[0]));
-    const bussinessFile=Object.keys(items[0]).includes('bussinessFile');
-    console.log('bussinessFile:',bussinessFile);
+    // console.log('Object.keys(items[0]):',Object.keys(items[0]));
+    // if(items){
+
+    //     const bussinessFile=Object.keys(items[0]).includes('bussinessFile');
+    // }
+    // console.log('bussinessFile:',bussinessFile);
 //if there is some producta in the cart
 if(items.length>0){
     const regex=/(\w+\:)/g;
@@ -48,7 +51,7 @@ ${item.advantages.map(advantage=>
    
 <p id='pQuantity'><strong>Quantity:</strong><span class='quantity'>${item.quantity}</span></p>
     <p class="priceStamp">Price:${item.price}€</p>
-    ${item.bussinessFile ? ` <p class="priceStamp">Your Bussiness Info:</p><div class="img-box"><img src="${item.bussinessFile}"></div>` : null}
+    ${item.bussinessFile ? ` <p class="priceStamp">Your Bussiness Info:</p><div class="img-box"><img src="${item.bussinessFile}"></div>` : ""}
     <button class="AddBtn">Add more</button>
     <button class="ReduceBtn">Reduce</button>
     <button class="RemoveBtn">Remove</button>
@@ -69,6 +72,42 @@ totals.insertAdjacentHTML('beforeend',checkout);
 }
 
 }
+
+
+
+// const checkoutBtn=document.querySelector('.checkoutBtn');
+// console.log('checkoutBtn:',checkoutBtn);
+// const userId=currentUser;
+
+// if(checkoutBtn){
+
+//     checkoutBtn.addEventListener('click',async()=>{
+    
+//         const response=await fetch(`/api/v1/booking/checkout-session/${userId}`,{
+//             method:'GET',
+//             headers:{'Content-Type':'application/json'}
+//         })
+    
+//         const result=await response.json();
+//         if(!response.ok){
+//             alert('Error:',result.message)
+//         }
+//         alert('fetch is succesful!')
+//         const data=result.data;
+//         console.log('data from checkout-session:',data)
+// const session=result.session;
+
+//         window.location.assign(session.url)//help here
+    
+    
+    
+    
+//     })
+// }
+
+
+
+
 
 })
 ///////////////////////
@@ -171,3 +210,19 @@ totalAmount.innerText=`${data.totalAmount.toFixed(2)}€`;
 //////////////////////////////////////////
     }
 })
+// console.log('currentUser:',currentUser);
+
+
+const userId=currentUser;
+// At the bottom of your code, add a listener to the parent container
+totals.addEventListener('click', async (e) => {
+    if (e.target.classList.contains('checkoutBtn')) {
+        const response = await fetch(`/api/v1/booking/checkout-session/${userId}`);
+        const result = await response.json();
+        
+        if (!response.ok) return alert(result.message);
+        
+        // Redirect to Stripe
+        window.location.assign(result.session.url);
+    }
+});

@@ -102,14 +102,7 @@ if (h2Title) h2Title.classList.remove(...animations);
 
 
 
-// h2Title.classList.remove(...animations);
-// p1.classList.remove(...animations);
-// p2.classList.remove(...animations);
 
-// imgSlide.src=nextIndex.src;
-// h2Title.textContent=nextIndex.h2Title;
-// p1.textContent=nextIndex.p1;
-// p2.textContent=nextIndex.p2;
 
 currentIndex=(currentIndex+1)%heroObject.length;
 

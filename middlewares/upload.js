@@ -3,7 +3,7 @@ const multer=require('multer');
 const path=require('path');
 // const upload=multer({dest:'uploads/'})
 const storage=multer.diskStorage({
-    destination:(req,file,cb)=>cb(null,'./public/uploads/'),
+    destination:(req,file,cb)=>cb(null,'public/uploads/'),
     filename:(req,file,cb)=>{
         const uniqueSuffix=Date.now()+'-'+Math.round(Math.random()*1E9);
         cb(null,uniqueSuffix+path.extname(file.originalname))
@@ -18,7 +18,7 @@ const fileFilter=(req,file,cb)=>{
     if(extname && mimetype){
         return cb(null,true);
     }else{
-        cb(new Error('Only images(jpeg,jpg,png,gif) are allowed!'));
+        cb(new Error('Only images(jpeg,jpg,png,pdf) are allowed!'));
     }
 };
 

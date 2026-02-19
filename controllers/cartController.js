@@ -64,14 +64,14 @@ if(product.type==='Štambilj automat'){
                 image:product.image,
                 description:product.description,
                 advantages:product.advantages, //might be a problem , i might have to put it in an array
-                bussinessFile:myFile.path,
+                bussinessFile:`/uploads/${myFile.filename}`,
                 price
             }
         ],
         totalProducts:1,
         totalAmount:price
      });
-     res.status(201).json({data:newCart})
+    return res.status(201).json({data:newCart})
     }catch(err){
         res.status(500).json({ message: err.message });
     }
@@ -119,18 +119,30 @@ if(existingItemIndex>-1){
     cart.items[existingItemIndex].quantity+=1;
 //here i could add a total price of the same products together
 
+if (myFile) {
+    cart.items[existingItemIndex].bussinessFile = `/uploads/${myFile.filename}`;
+}
+
 }else{
     // cart.items.push({[productType]:productId,quantity:1,price});
     //otherwise add inside the cart everything like i adde in the creation of the cart and adding the first product
+const newItem={
+    productId,
+    productType,//like stamp,awar or caketopper
+    type:product.type,// the type of stamp(model etc)
+    quantity:1,
+    image:product.image,
+    description:product.description,
+    advantages:product.advantages,
+    price
 
-    cart.items.push({productId,
-        productType,//like stamp,awar or caketopper
-        type:product.type,// the type of stamp(model etc)
-        quantity:1,
-        image:product.image,
-        description:product.description,
-        advantages:product.advantages,
-        price});
+}
+
+if(myFile){
+    newItem.bussinessFile=`/uploads/${myFile.filename}`;
+}
+
+    cart.items.push(newItem);
 
 }
 
@@ -150,13 +162,16 @@ catch(err){
 }
 
 }
-exports.showCart=async(req,res)=>{
+exports.showCart=async(req,res,next)=>{
 try{
 console.log('req.query:',req.query)
     const {userId}=req.query;
-    console.log('userId found!',userId)
+
+    if(!userId)return next(new AppError('Please provide a User Id to see the cart',400));
+    // console.log('userId found!',userId)
+
     const cart=await Cart.findOne({userId});
-    if(!cart)return res.status(404).json({status:'fail',message:'The cart is empty'})
+    if(!cart)return next(new AppError('There is nothing in the cart, please add products in cart',400))
     return res.status(200).json({status:200,data:cart})
 }
 catch(err){
@@ -167,18 +182,24 @@ catch(err){
 }
 
 }
-exports.updateCart=async(req,res)=>{
+exports.updateCart=async(req,res,next)=>{
     const{userId,productId}=req.body;
-    console.log('userId:',userId,'productId:',productId);
+    // console.log('userId:',userId,'productId:',productId);
+    if(!userId)return next(new AppError('Please provide a User Id to see the cart',400));
+    if(!productId)return next(new AppError('Please provide a productId to see the cart',400));
+
+
 //first lets find the cart and if there is any:
 
 const cart=await Cart.findOne({userId});
 //check if there is a cart
-if(!cart) return res.status(404).json({status:'fail',message:'There is no cart available'})
+if(!cart) return next(new AppError('There is nothing in the cart to update!',400))
 //so it exists then
 const items=cart.items;
+
 const existingItemIndex=items.findIndex(item=>item.productId===productId)
-console.log("existingItemIndex:",existingItemIndex);
+// console.log("existingItemIndex:",existingItemIndex);
+
 if(existingItemIndex>-1){
     if(items[existingItemIndex].quantity>1){
 
@@ -198,16 +219,23 @@ res.status(200).json({status:'success',data:cart})
 }
 exports.removeProductFromCart=async(req,res)=>{
     const{userId,productId}=req.body;
-    console.log('userId:',userId,'productId:',productId);
+    // console.log('userId:',userId,'productId:',productId);
+
+    if(!userId)return next(new AppError('Please provide a User Id to see the cart',400));
+    if(!productId)return next(new AppError('Please provide a productId to see the cart',400));
+
+
+
 //first lets find the cart and if there is any:
 
 const cart=await Cart.findOne({userId});
 //check if there is a cart
-if(!cart) return res.status(404).json({status:'fail',message:'There is no cart available'})
+if(!cart) return next(new AppError('There is nothing in the cart, please add some product!',400))
 //so it exists then
 const items=cart.items;
 const existingItemIndex=items.findIndex(item=>item.productId===productId)
-console.log("existingItemIndex:",existingItemIndex);
+// console.log("existingItemIndex:",existingItemIndex);
+
 if(existingItemIndex>-1){
    items.splice(existingItemIndex,1);
 

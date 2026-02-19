@@ -57,6 +57,7 @@ stampsContainer.insertAdjacentHTML('beforeend',html)
 //for the add to cart in case is automat stambilj
 stampsContainer.addEventListener('change',(e)=>{
     if(e.target.id==='business-file-input'){
+        console.log('a file is loaded!')
         const productCard=e.target.closest('.product-box');
         const addBtn=productCard.querySelector('.stampBtn');
         if(e.target.files.length>0){
@@ -74,10 +75,10 @@ stampsContainer.addEventListener('change',(e)=>{
 //event delegation:
 stampsContainer.addEventListener('click',async(e)=>{
     const formBussinessInfo=document.querySelector('#formBussinessInfo');
-    console.log('formBussinessInfo:',formBussinessInfo);
+    // console.log('formBussinessInfo:',formBussinessInfo);
     
     
-    if(e.target.classList.contains('stampBtn') && formBussinessInfo  ){
+    if(e.target.classList.contains('stampBtn')){
         
 const productCard=e.target.closest('.product-box');
 const productId=productCard.dataset.productid;
@@ -85,15 +86,16 @@ const productType=productCard.dataset.producttype;
 const inputFile=productCard.querySelector('#business-file-input');
 let userId=currentUser
 
+const formData=new FormData();
+
 // If the input exists but has no file (extra safety check)
-if (inputFile && inputFile.files.length === 0) {
-    alert("Please upload your Business ID first!");
-    return;
+if (inputFile && inputFile.files[0]) {
+    formData.append('bussinessInfo',inputFile.files[0]);
+    console.log('the file that we send to backend to save is:',inputFile.files[0]);
+
 }
 
 
-    const formData=new FormData();
-    formData.append('bussinessInfo',inputFile.files[0]);
 formData.append('productId',productId);
 formData.append('productType',productType);
 formData.append('userId',currentUser)
@@ -107,7 +109,7 @@ formData.append('userId',currentUser)
         alert(`ERROR:${result.message}`)
     }else{
 const data=result.data;
-console.log('data:',data)
+console.log('data when we send to cart:',data)
         alert("File is uploaded successfully and product added to the cart!")
         if(data.items.length>0){
             cartImage.classList.add('animate__animated', 'animate__bounce','animate__infinite','animate__slower');
