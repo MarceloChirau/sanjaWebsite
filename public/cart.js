@@ -9,6 +9,7 @@ const checkout=`
 `
 
 // const userId=localStorage.getItem('userId');
+console.log('window.location:',window.location.href)
 
 document.addEventListener("DOMContentLoaded",async()=>{
 const response=await fetch(`/api/v1/cart?userId=${currentUser}`,{
@@ -19,11 +20,21 @@ const response=await fetch(`/api/v1/cart?userId=${currentUser}`,{
 
 const result=await response.json();
 
-if(!response.ok){
-    alert(`ERROR:${result.message}`)
+if(!response.ok || !result.data || result.data.items.length===0){
+const html=`
+<div class="cartIsEmptyContainer">
+<h1>Your Cart is Emtpy</h1>
+<h2>You can go back to shopping</h2>
+</div>
+`
+cartContainer.innerHTML=html;
+totals.style.display='none';
+// return cartContainer.insertAdjacentHTML('beforeend',html);
+return;
+
 }else{
     const data=result.data;
-    console.log('Data:',data);
+    // console.log('Data:',data);
     const items=data.items;
     // console.log('Object.keys(items[0]):',Object.keys(items[0]));
     // if(items){
@@ -63,166 +74,146 @@ ${item.advantages.map(advantage=>
     `
 }).join('')
         
-cartContainer.insertAdjacentHTML('beforeend',html);
+// cartContainer.insertAdjacentHTML('beforeend',html);
 
+cartContainer.innerHTML=html;
 totalProducts.innerText=`${data.totalProducts}`
 totalAmount.innerText=`${data.totalAmount.toFixed(2)}€`;
+tot
 totals.insertAdjacentHTML('beforeend',checkout);
-
+totals.style.display='block';
+if(!document.querySelector('.checkoutBtn')) totals.insertAdjacentHTML('beforeend', checkout);
 }
 
 }
-
-
-
-// const checkoutBtn=document.querySelector('.checkoutBtn');
-// console.log('checkoutBtn:',checkoutBtn);
-// const userId=currentUser;
-
-// if(checkoutBtn){
-
-//     checkoutBtn.addEventListener('click',async()=>{
-    
-//         const response=await fetch(`/api/v1/booking/checkout-session/${userId}`,{
-//             method:'GET',
-//             headers:{'Content-Type':'application/json'}
-//         })
-    
-//         const result=await response.json();
-//         if(!response.ok){
-//             alert('Error:',result.message)
-//         }
-//         alert('fetch is succesful!')
-//         const data=result.data;
-//         console.log('data from checkout-session:',data)
-// const session=result.session;
-
-//         window.location.assign(session.url)//help here
-    
-    
-    
-    
-//     })
-// }
-
-
-
-
 
 })
 ///////////////////////
 
-cartContainer.addEventListener('click',async(e)=>{
+if(cartContainer){// i did this beacuse when gallery is loading it throw an error
 
 
- ////////////////////////////////////////////////////////////   
-    if(e.target.classList.contains('AddBtn')){
-        //userId,productId,productType
-        const productCard=e.target.closest('.product-box');
-        const productId=productCard.dataset.productid;
-        const productType=productCard.dataset.producttype;
-        const quantity=productCard.querySelector('.quantity')
-        console.log('userId…',currentUser)
-
-const response=await fetch('/api/v1/cart',{
-    method:'POST',
-    headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({productId,productType,userId:currentUser})
-})
-
-const result=await response.json();
-if(!response.ok)alert(`ERROR:${result.message}`)
-
+    cartContainer.addEventListener('click',async(e)=>{
+    
+    
+     ////////////////////////////////////////////////////////////   
+        if(e.target.classList.contains('AddBtn')){
+            //userId,productId,productType
+            const productCard=e.target.closest('.product-box');
+            const productId=productCard.dataset.productid;
+            const productType=productCard.dataset.producttype;
+            const quantity=productCard.querySelector('.quantity')
+            console.log('userId…',currentUser)
+    
+    const response=await fetch('/api/v1/cart',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({productId,productType,userId:currentUser})
+    })
+    
+    const result=await response.json();
+    if(!response.ok)alert(`ERROR:${result.message}`)
+    
+        const data=result.data;
+        console.log('data:',data);
+        const items=data.items;
+        const existingItemIndex=items.findIndex(item=>item.productId===productId)
+    
+        if(existingItemIndex>-1){
+           quantity.innerText= `${items[existingItemIndex].quantity}`;
+        }
+    
+        totalProducts.innerText=`Number of Products:${data.totalProducts}`
+    totalAmount.innerText=`Total Amount:${data.totalAmount.toFixed(2)}`;
+        }else if(e.target.classList.contains('ReduceBtn')){
+    
+            const productCard=e.target.closest('.product-box');
+            const productId=productCard.dataset.productid;
+            const productType=productCard.dataset.producttype;
+            const quantity=productCard.querySelector('.quantity');
+    
+            const response=await fetch('/api/v1/cart',{
+                method:'PATCH',
+                headers:{'Content-Type':'application/json'},
+                body:JSON.stringify({userId:currentUser,productId})
+            })
+            const result=await response.json();
+    if(!response.ok){
+        alert(`ERROR:${result.message}`)
+    }
     const data=result.data;
-    console.log('data:',data);
-    const items=data.items;
-    const existingItemIndex=items.findIndex(item=>item.productId===productId)
-
-    if(existingItemIndex>-1){
-       quantity.innerText= `${items[existingItemIndex].quantity}`;
+        console.log('data:',data);
+        const items=data.items;
+        const existingItemIndex=items.findIndex(item=>item.productId===productId)
+    
+        if(existingItemIndex>-1){
+           quantity.innerText= `${items[existingItemIndex].quantity}`;
+        }else if(existingItemIndex===-1){
+            productCard.remove();
+        }
+    
+        totalProducts.innerText=`${data.totalProducts}`
+    totalAmount.innerText=`${data.totalAmount.toFixed(2)}€`;
+    
+        }else if(e.target.classList.contains('RemoveBtn')){
+    ///////////////////////////////////////////
+    const productCard=e.target.closest('.product-box');
+            const productId=productCard.dataset.productid;
+            const productType=productCard.dataset.producttype;
+            const quantity=productCard.querySelector('.quantity');
+    
+            const response=await fetch('/api/v1/cart',{
+                method:'DELETE',
+                headers:{'Content-Type':'application/json'},
+                body:JSON.stringify({userId:currentUser,productId})
+            })
+            const result=await response.json();
+    if(!response.ok){
+        alert(`ERROR:${result.message}`)
     }
-
-    totalProducts.innerText=`Number of Products:${data.totalProducts}`
-totalAmount.innerText=`Total Amount:${data.totalAmount.toFixed(2)}`;
-    }else if(e.target.classList.contains('ReduceBtn')){
-
-        const productCard=e.target.closest('.product-box');
-        const productId=productCard.dataset.productid;
-        const productType=productCard.dataset.producttype;
-        const quantity=productCard.querySelector('.quantity');
-
-        const response=await fetch('/api/v1/cart',{
-            method:'PATCH',
-            headers:{'Content-Type':'application/json'},
-            body:JSON.stringify({userId:currentUser,productId})
-        })
-        const result=await response.json();
-if(!response.ok){
-    alert(`ERROR:${result.message}`)
+    const data=result.data;
+        console.log('data:',data);
+        const items=data.items;
+        const existingItemIndex=items.findIndex(item=>item.productId===productId)
+    
+        if(existingItemIndex===-1){
+            productCard.remove()
+        }
+    
+// Inside your click listener, after removing an item:
+if (cartContainer.querySelectorAll('.product-box').length === 0) {
+    cartContainer.innerHTML = `
+        <div class="cartIsEmptyContainer">
+            <h1>Your Cart is Empty</h1>
+        </div>`;
+    totals.style.display = 'none'; // Hide the checkout button and totals
 }
-const data=result.data;
-    console.log('data:',data);
-    const items=data.items;
-    const existingItemIndex=items.findIndex(item=>item.productId===productId)
 
-    if(existingItemIndex>-1){
-       quantity.innerText= `${items[existingItemIndex].quantity}`;
-    }else if(existingItemIndex===-1){
-        productCard.remove();
-    }
-
-    totalProducts.innerText=`${data.totalProducts}`
-totalAmount.innerText=`${data.totalAmount.toFixed(2)}€`;
-
-    }else if(e.target.classList.contains('RemoveBtn')){
-///////////////////////////////////////////
-const productCard=e.target.closest('.product-box');
-        const productId=productCard.dataset.productid;
-        const productType=productCard.dataset.producttype;
-        const quantity=productCard.querySelector('.quantity');
-
-        const response=await fetch('/api/v1/cart',{
-            method:'DELETE',
-            headers:{'Content-Type':'application/json'},
-            body:JSON.stringify({userId:currentUser,productId})
-        })
-        const result=await response.json();
-if(!response.ok){
-    alert(`ERROR:${result.message}`)
+        totalProducts.innerText=`${data.totalProducts}`
+    totalAmount.innerText=`${data.totalAmount.toFixed(2)}€`;
+    
+    
+    
+    
+    
+    
+    //////////////////////////////////////////
+        }
+    })
+    // console.log('currentUser:',currentUser);
+    
+    
+    const userId=currentUser;
+    // At the bottom of your code, add a listener to the parent container
+    totals.addEventListener('click', async (e) => {
+        if (e.target.classList.contains('checkoutBtn')) {
+            const response = await fetch(`/api/v1/booking/checkout-session/${userId}`);
+            const result = await response.json();
+            
+            if (!response.ok) return alert(result.message);
+            
+            // Redirect to Stripe
+            window.location.assign(result.session.url);
+        }
+    });
 }
-const data=result.data;
-    console.log('data:',data);
-    const items=data.items;
-    const existingItemIndex=items.findIndex(item=>item.productId===productId)
-
-    if(existingItemIndex===-1){
-        productCard.remove()
-    }
-
-    totalProducts.innerText=`${data.totalProducts}`
-totalAmount.innerText=`${data.totalAmount.toFixed(2)}€`;
-
-
-
-
-
-
-//////////////////////////////////////////
-    }
-})
-// console.log('currentUser:',currentUser);
-
-
-const userId=currentUser;
-// At the bottom of your code, add a listener to the parent container
-totals.addEventListener('click', async (e) => {
-    if (e.target.classList.contains('checkoutBtn')) {
-        const response = await fetch(`/api/v1/booking/checkout-session/${userId}`);
-        const result = await response.json();
-        
-        if (!response.ok) return alert(result.message);
-        
-        // Redirect to Stripe
-        window.location.assign(result.session.url);
-    }
-});

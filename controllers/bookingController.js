@@ -112,6 +112,7 @@ res.status(200).json({
 exports.webhookCheckout=async(req,res,next)=>{
     //This function listens for the checkout.session.completed event,
     // finds the userId (which we stored in client_reference_id), and empties the cart.
+    //also calls twice the sendEmail function,1 to notify the owner and 2 to notify the custumer
     const signature=req.headers['stripe-signature'];
     let event;
     try{
@@ -139,9 +140,10 @@ const newOrder=await Order.create({
     userId:session.client_reference_id,
     orderNumber:session.id,
         customerName: session.collected_information.shipping_details.name,
+        customerPhone:session.customer_details.phone,
         email: session.customer_details?.email || 'No email provided',
         shippingAddress: session.collected_information.shipping_details?.address || {},
-        items: cart.items, // This has your bussinessFile paths!
+        items: cart.items, // This has the bussinessFile paths!
         totalAmount: session.amount_total / 100
 })
 console.log('this is the newOrder:',newOrder);
@@ -159,6 +161,7 @@ const itemsList=cart.items.map(item=>`
     const adminEmailHtml=`
     <h1>New Order: ${newOrder.orderNumber}</h1>
     <p><strong>Customer:</strong>${newOrder.customerName} (${newOrder.email})</p>
+    <p><strong>Phone:</strong>${newOrder.customerPhone}</p>
     <p><strong>Shipping Info</strong><br>
     Country: ${newOrder.shippingAddress?.country || ''},<br>
     City: ${newOrder.shippingAddress?.city || 'N/A'},<br>
@@ -191,17 +194,39 @@ try{
 // B. Notification for the CUSTOMER
 console.log('Step 2: Sending Customer Email...');
 try{
-
+    //https://aryan-interlaboratory-junita.ngrok-free.dev/images/brand/logoPng.png
+const logoUrl=`${process.env.DOMAIN_URL}/images/brand/logoPng.png`;
     await sendEmail({
         email: newOrder.email,
         subject: 'Hvala na kupnji! Vaša narudžba je primljena.',
-        html: `
-            <div style="font-family: sans-serif; padding: 20px; border: 1px solid #eee;">
-                <h2>Hvala, ${session.customer_details.name}!</h2>
-                <p>Primili smo vašu narudžbu <strong>${newOrder.orderNumber}</strong>.</p>
-                <p>Naš tim će sada pregledati vaše podatke i krenuti u izradu vašeg štambilja.</p>
-                <hr>
-                <p>Ukupno plaćeno: €${session.amount_total / 100}</p>
+        html: `<!DOCTYPE html>
+        <html>
+        <head>
+        <style>
+        @font-face{
+  font-family: 'champagne';
+  src:url("fontChampagne/ChampagneLimousines.ttf");
+  font-weight:normal;
+}
+  </style>
+  </head>
+  <body style="margin:0; padding:0;background-color:#E7BFC0;">
+            <div style="font-family: 'champagne','Trebuchet MS', Helvetica, Arial, sans-serif;
+             padding: 20px;
+              border: 1px solid #eee;">
+<div>
+<img src="${logoUrl}"        
+alt="Logo"
+width="150"
+style="display:block; border:0;"
+>
+</div>
+
+                <h2 style="color:#5D100A" >Hvala, ${session.customer_details.name}!</h2>
+                <p style="color:#A3485A" >Primili smo vašu narudžbu <strong>${newOrder.orderNumber}</strong>.</p>
+                <p style="color:#A3485A">Naš tim će sada pregledati vaše podatke i krenuti u izradu vašeg štambilja.</p>
+                <hr style="color:#5D100A">
+                <p style="color:#5D100A" >Ukupno plaćeno: €${session.amount_total / 100}</p>
             </div>
         `
     });

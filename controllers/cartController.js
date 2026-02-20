@@ -171,12 +171,13 @@ console.log('req.query:',req.query)
     // console.log('userId found!',userId)
 
     const cart=await Cart.findOne({userId});
-    if(!cart)return next(new AppError('There is nothing in the cart, please add products in cart',400))
-    return res.status(200).json({status:200,data:cart})
+    if(!cart)return res.status(200).json({status:'success',data:null});// i dont want any error just because the cart is empty
+    return res.status(200).json({status:'success',data:cart})
+        
 }
 catch(err){
-    res.status(404).json({
-        status:'fail',
+    res.status(500).json({
+        status:'error',
         message:err.message
     })
 }

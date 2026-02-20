@@ -11,6 +11,11 @@ app.post('/webhook-checkout',
 );
 
 app.use(express.json());
+//just for ngrok:
+app.use((req, res, next) => {
+    res.setHeader('ngrok-skip-browser-warning', 'true');
+    next();
+  });
 app.use(express.static(path.join(__dirname,'public')))
 const stampRouter=require('./routes/stampRoutes.js')
 const cartRouter=require('./routes/cartRoutes.js')

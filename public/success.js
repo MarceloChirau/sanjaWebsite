@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 // 3. Update the UI
                 document.getElementById('customer-name').textContent = session.customer_details.name;
                 document.getElementById('amount-paid').textContent = (session.amount_total / 100).toFixed(2);
-                document.getElementById('order-id').textContent = session.id.slice(-10); // Last 10 chars
+                document.getElementById('order-id').textContent = session.id // Last 10 chars
             }
         } catch (err) {
             console.error('Error fetching session:', err);
