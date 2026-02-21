@@ -3,29 +3,29 @@ const mongoose=require('mongoose');
 const cakeTopperSchema=new mongoose.Schema({
     type:{
         type:String,
-        enum:['Štambilj automat', 
-            'Pečat za ovjeru',
-            'Štambilj datumar mini',
-        'Prijemni pečat',
-        'Okrugli pečat-Tradicija i identitet'
+        enum:['Wedding cakeTopper', 
+            'Birthday cakeTopper with Numbers',
+            'Birthday cakeTopper',
+        'Christening cakeTopper',
+        'Holly cakeTopper communion',
+        'Anniversary cakeTopper',
+        'Graduation cakeTopper',
+        'Other cakeTopper'
         ],
-        required:[true,'There should be a type for every stamp']
+        required:[true,'There should be a type for every cakeTtopper']
     },
-    productType:String,
+    material:String,
+    productType:String,//like stamp,cakeTopper etc
     price:{
         type:Number,
         required:[true,'Please add a price']
     },
-    description:{
-        type:String,
-        required:[true,'Please add some description']
-    },
-    advantages:{
-        type:[String],
-    },
     image:{
         type:String,
         required:[true,'Please add a picture']
+    },
+    size:{
+        type:String,
     }
 });
 

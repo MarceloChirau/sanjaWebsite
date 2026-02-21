@@ -1,6 +1,5 @@
 const Cart=require('../models/cartModel');
 const Stamp=require('../models/stampModel');
-const Award = require('../models/awardModel');
 const CakeTopper = require('../models/cakeTopperModel');
 const multer=require('multer');
 const AppError=require('../utils/AppError')
@@ -24,10 +23,6 @@ let product;
            product=await Stamp.findById({_id:productId});
             break;
             
-            //if it is an award then search for a award with the id provided
-            case "award":
-           product=await Award.findById({_id:productId})
-            break;
             
             //if it is a cakeTopper then search for a cakeTopper with the id provided
         case 'cakeTopper':
@@ -111,7 +106,7 @@ const existingItemIndex=cart.items.findIndex(item=>{
     console.log(item.productId);
      return  item.productId===productId;
 })
-console.log('the existingItemIndex is at: ',existingItemIndex)
+// console.log('the existingItemIndex is at: ',existingItemIndex)
 
 //if exists in cart already
 if(existingItemIndex>-1){
@@ -122,13 +117,12 @@ if(existingItemIndex>-1){
 if (myFile) {
     cart.items[existingItemIndex].bussinessFile = `/uploads/${myFile.filename}`;
 }
-
 }else{
     // cart.items.push({[productType]:productId,quantity:1,price});
-    //otherwise add inside the cart everything like i adde in the creation of the cart and adding the first product
+    //otherwise add inside the cart everything like i add in the creation of the cart and adding the first product
 const newItem={
     productId,
-    productType,//like stamp,awar or caketopper
+    productType,//like stamp, caketopper
     type:product.type,// the type of stamp(model etc)
     quantity:1,
     image:product.image,

@@ -166,6 +166,7 @@ const itemsList=cart.items.map(item=>`
     Country: ${newOrder.shippingAddress?.country || ''},<br>
     City: ${newOrder.shippingAddress?.city || 'N/A'},<br>
     Postal Code: ${newOrder.shippingAddress?.postal_code || ''}</p>
+
     <ul>${itemsList}</ul>
     <p><strong>Total Paid:</strong> €${newOrder.totalAmount}</p>
     `

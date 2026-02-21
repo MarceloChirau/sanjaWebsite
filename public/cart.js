@@ -53,7 +53,7 @@ if(items.length>0){
     <img src="${item.image}">
     </div>
     <h3 class="h3Type"><strong>${item.type}</strong></h3>
-    <p class="stampDescription">${item.description}</p>
+    ${item.description ? `<p class="stampDescription">${item.description}</p>` :''}
     <ul class="unorganisedList">
 ${item.advantages.map(advantage=>
     `<li class="advantageList">${advantage.replace(regex,match=>`<strong class="strongLists">${match}</strong>`)}</li>`
@@ -79,7 +79,6 @@ ${item.advantages.map(advantage=>
 cartContainer.innerHTML=html;
 totalProducts.innerText=`${data.totalProducts}`
 totalAmount.innerText=`${data.totalAmount.toFixed(2)}€`;
-tot
 totals.insertAdjacentHTML('beforeend',checkout);
 totals.style.display='block';
 if(!document.querySelector('.checkoutBtn')) totals.insertAdjacentHTML('beforeend', checkout);

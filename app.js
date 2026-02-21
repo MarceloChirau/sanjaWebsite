@@ -4,6 +4,9 @@ const path=require('path');
 const globalErrorHandler=require('./middlewares/errorMiddleware.js');
 const bookingRoutes=require('./routes/bookingRoutes.js');
 const bookingController=require('./controllers/bookingController');
+const stampRouter=require('./routes/stampRoutes.js')
+const cartRouter=require('./routes/cartRoutes.js')
+const weddingRouter=require('./routes/weddingRoutes.js')
 
 app.post('/webhook-checkout',
     express.raw({type:'application/json'}),
@@ -17,12 +20,10 @@ app.use((req, res, next) => {
     next();
   });
 app.use(express.static(path.join(__dirname,'public')))
-const stampRouter=require('./routes/stampRoutes.js')
-const cartRouter=require('./routes/cartRoutes.js')
-
 
 
 app.use('/api/v1/stamps',stampRouter)
+app.use('/api/v1/weddingTopper',weddingRouter)
 app.use('/api/v1/cart',cartRouter)
 app.use('/api/v1/booking',bookingRoutes)
 

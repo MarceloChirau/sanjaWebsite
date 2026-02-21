@@ -5,7 +5,6 @@ const cartSchema=new mongoose.Schema({
     items:[
         {
             stamp:{type:mongoose.Schema.Types.ObjectId,ref:'Stamp'},
-            award:{type:mongoose.Schema.Types.ObjectId,ref:'Award'},
             cakeTopper:{type:mongoose.Schema.Types.ObjectId,ref:'CakeTopper'},
 
             productId:{type:String},

@@ -1,0 +1,49 @@
+[
+    
+    {
+        "productType":"cakeTopper",
+      "material": "Ogledalo", 
+      "price": 7.00,
+      "image": "./images/cakeTopperImages/wedding1.jpeg",
+      "size":"15cm",
+      "type":"Wedding cakeTopper"
+    },
+    {"productType":"cakeTopper",
+      "material": "Ogledalo", 
+      "price": 7.00,
+      "image": "./images/cakeTopperImages/wedding2.jpeg",
+      "size":"15cm",
+      "type":"Wedding cakeTopper"
+    },
+    {"productType":"cakeTopper",
+      "material": "Ogledalo", 
+      "price": 7.00,
+      "image": "./images/cakeTopperImages/wedding3.jpeg",
+      "size":"15cm",
+      "type":"Wedding cakeTopper"
+    },
+    {"productType":"cakeTopper",
+      "material": "Plexiglass", 
+      "price": 7.00,
+      "image": "./images/cakeTopperImages/wedding4.jpeg",
+      "size":"15cm",
+      "type":"Wedding cakeTopper"
+    },
+    {"productType":"cakeTopper",
+      "material": "Ogledalo", 
+      "price": 7.00,
+      "image": "./images/cakeTopperImages/wedding5.jpeg",
+      "size":"15cm",
+      "type":"Wedding cakeTopper"
+    },
+    {"productType":"cakeTopper",
+      "material": "Plexiglass", 
+      "price": 7.00,
+      "image": "./images/cakeTopperImages/wedding6.jpeg",
+      "size":"15cm",
+      "type":"Wedding cakeTopper"
+    }
+
+    
+  
+]

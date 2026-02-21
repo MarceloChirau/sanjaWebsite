@@ -1,3 +1,10 @@
+h1{
+    text-align: center;
+    font-family: 'champagne';
+color:var(--primary-color);
+margin-top: 2rem;
+
+}
 .cakeTopper-container{
     display:flex;
     flex-direction: column;
@@ -5,12 +12,10 @@
     align-items: center;
     flex-wrap: wrap;
     margin:1rem;
+    padding:0;
 }
 .box-material{
     font-family: 'champagne';
-    border:1px solid var(--primary-color);
-    border-radius:20px;
-    box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.14);
     display:flex;
     flex-direction: column;
     justify-content: center;
@@ -20,15 +25,44 @@
     padding:1.9em;
 
 }
-.box-material:hover{
-    background-color: var(--nineth-color);
-}
+
 
 .box-material>h3{
     color:var(--primary-color);
+    font-size: x-large;
+
 }
 .box-material>p{
     color:var(--seventh-color);
+}
+/*////////////////////////////// */
+.categories-box{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding:1em;
+    border:2px solid var(--primary-color);
+    border-radius: 20px;
+    width: 300px;
+    color:var(--primary-color);
+    margin:1rem;
+}
+.categories-box:hover{
+    background-color: var(--nineth-color);
+}
+
+.imgWrapper{
+    width:200px;
+    max-width:300px ;
+    height:auto;
+    border-radius:20px;
+}
+.imgWrapper>img{
+    width:100%;
+    height:100%;
+    border-radius:20px;
+
 }
 
 @media(min-width:844px){
@@ -38,7 +72,7 @@
         justify-content: center;
         align-items: center;
         flex-wrap: wrap;
-        height:100vh;
+        height:100%;
     }
     .box-material{
         max-width: 300px;
