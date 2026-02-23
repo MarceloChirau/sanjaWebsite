@@ -25,17 +25,41 @@ cloudinary.config({
 // })
 
 // For older versions of the library, we explicitly pass the cloudinary v2 object
+// const storage = new CloudinaryStorage({
+//     cloudinary: cloudinary, 
+//     folder: 'vrbanus_uploads', // In v2.x, folder is often outside 'params'
+//     allowedFormats: ['jpg', 'png', 'jpeg', 'pdf'],
+//     filename: (req, file, cb) => {
+//         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+//         cb(null, uniqueSuffix); // Custom filename logic if needed
+//     }
+// });
+
+// const storage = new CloudinaryStorage({
+//     cloudinary: cloudinary,
+//     params: {
+//         folder: 'vrbanus_uploads',
+//     },
+//     // Adding this for version compatibility
+//     cloudinary_v2: cloudinary 
+// });
+
 const storage = new CloudinaryStorage({
-    cloudinary: cloudinary, 
-    folder: 'vrbanus_uploads', // In v2.x, folder is often outside 'params'
+    cloudinary: cloudinary,
+    // For version 2.2.1, try putting these at the top level
+    folder: 'vrbanus_uploads',
     allowedFormats: ['jpg', 'png', 'jpeg', 'pdf'],
-    filename: (req, file, cb) => {
-        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-        cb(null, uniqueSuffix); // Custom filename logic if needed
+    // If the library version is strictly looking for params:
+    params: {
+        folder: 'vrbanus_uploads',
+        format: async (req, file) => {
+            // This manually extracts the extension to be safe
+            const ext = file.mimetype.split('/')[1];
+            return ['jpg', 'png', 'jpeg', 'pdf'].includes(ext) ? ext : 'jpg';
+        },
+        public_id: (req, file) => Date.now() + '-' + file.originalname.split('.')[0],
     }
 });
-
-
 
 
 const upload=multer({
