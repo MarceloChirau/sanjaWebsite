@@ -150,12 +150,16 @@ console.log('this is the newOrder:',newOrder);
 
 
 const itemsList=cart.items.map(item=>`
-  <li>
-  <strong>${item.type}</strong> (Quantity:${item.quantity})<br>
-  ${item.bussinessFile
-     ? `<a href="${process.env.DOMAIN_URL}${item.bussinessFile}">View Bussiness Info Image</a>`
-     : 'No file needed'}  
+  <li style="margin-block:0.3em">
+   <strong>Product type:</strong>${item.productType}(${item.type}) <br>
+   ${item.productType==='cakeTopper' ? `<strong>Material:</strong>${item.material}<br>`:''}
+   <strong>Quantity:</strong>${item.quantity}<br>
+  
+   ${item.bussinessFile
+     ? `<strong>Bussiness Info:</strong><img src="${process.env.DOMAIN_URL}${item.bussinessFile}" alt="${item.productType}" width='80px' style="margin-right: 15px; border-radius: 4px; display: block;" >`
+     : `<strong>Product Image:</strong><img src="${process.env.DOMAIN_URL}${item.image}" alt="${item.productType}" width='80px' style="margin-right: 15px; border-radius: 4px; display: block;">`}  
     </li>
+
     `).join('');
 
     const adminEmailHtml=`
@@ -163,11 +167,12 @@ const itemsList=cart.items.map(item=>`
     <p><strong>Customer:</strong>${newOrder.customerName} (${newOrder.email})</p>
     <p><strong>Phone:</strong>${newOrder.customerPhone}</p>
     <p><strong>Shipping Info</strong><br>
-    Country: ${newOrder.shippingAddress?.country || ''},<br>
-    City: ${newOrder.shippingAddress?.city || 'N/A'},<br>
-    Postal Code: ${newOrder.shippingAddress?.postal_code || ''}</p>
-
+    <strong>Country:</strong> ${newOrder.shippingAddress?.country || ''},<br>
+    <strong>City:</strong> ${newOrder.shippingAddress?.city || 'N/A'},<br>
+    <strong>Postal Code:</strong> ${newOrder.shippingAddress?.postal_code || ''}</p>
+<h2>Products:</h2>
     <ul>${itemsList}</ul>
+    <p><strong>Total Products:</strong>${cart.totalProducts}</p>
     <p><strong>Total Paid:</strong> €${newOrder.totalAmount}</p>
     `
 
@@ -196,6 +201,7 @@ try{
 console.log('Step 2: Sending Customer Email...');
 try{
     //https://aryan-interlaboratory-junita.ngrok-free.dev/images/brand/logoPng.png
+    // https://aryan-interlaboratory-junita.ngrok-free.dev/images/cakeTopperImages/wedding1.jpeg
 const logoUrl=`${process.env.DOMAIN_URL}/images/brand/logoPng.png`;
     await sendEmail({
         email: newOrder.email,
@@ -227,6 +233,9 @@ style="display:block; border:0;"
                 <p style="color:#A3485A" >Primili smo vašu narudžbu <strong>${newOrder.orderNumber}</strong>.</p>
                 <p style="color:#A3485A">Naš tim će sada pregledati vaše podatke i krenuti u izradu vašeg štambilja.</p>
                 <hr style="color:#5D100A">
+                <h3 style="color:#5D100A">Proizvodi koje ste naručili:</h3>
+                <ul>${itemsList}</ul>
+                <p style="color:#5D100A">Ukupna količina proizvoda:${cart.totalProducts}</p>
                 <p style="color:#5D100A" >Ukupno plaćeno: €${session.amount_total / 100}</p>
             </div>
         `

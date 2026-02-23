@@ -86,6 +86,7 @@ cart=await Cart.create({
             image:product.image,
             description:product.description,
             advantages:product.advantages, //might be a problem , i might have to put it in an array
+    material:product.material,
             price
         }
     ],
@@ -128,6 +129,7 @@ const newItem={
     image:product.image,
     description:product.description,
     advantages:product.advantages,
+    material:product.material,
     price
 
 }

@@ -19,7 +19,7 @@ app.use((req, res, next) => {
     res.setHeader('ngrok-skip-browser-warning', 'true');
     next();
   });
-app.use(express.static(path.join(__dirname,'public')))
+app.use(express.static(path.join(__dirname,'public')));
 
 
 app.use('/api/v1/stamps',stampRouter)
