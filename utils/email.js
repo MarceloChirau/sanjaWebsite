@@ -1,4 +1,7 @@
 const nodemailer=require('nodemailer');
+// email.js
+
+
 
 const sendEmail=async(options)=>{
     //create a transporter
@@ -21,7 +24,8 @@ const sendEmail=async(options)=>{
         from:` Vrbanus <${process.env.EMAIL_USERNAME}>`,// this will be to whoever is the admin, developer or just owner of the site
         to:options.email,//'marcelodev89@gmail.com' or to customers depends where i want
         subject:options.subject,
-        html:options.html  //html to make it pretty
+        html:options.html,  //html to make it pretty
+        attachments:options.attachments || []
     };
 
     await transporter.sendMail(mailOptions);

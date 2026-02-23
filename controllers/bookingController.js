@@ -2,7 +2,7 @@ const Cart=require('../models/cartModel.js');
 const Order=require('../models/orderModel.js')
 const AppError=require('../utils/AppError.js');
 const sendEmail=require('../utils/email.js');
-
+const path = require('path');
 const stripe=require('stripe')(process.env.STRIPE_SECRET);
 
 
@@ -149,6 +149,17 @@ const newOrder=await Order.create({
 console.log('this is the newOrder:',newOrder);
 
 
+//preparing the array attachments for the admin :
+const emailAttachments = cart.items.map((item, index) => {
+    const fileToAttach = item.bussinessFile || item.image;
+  return{  filename: `${item.image}`,
+    // path.join(process.cwd(), ...) starts from your project's root folder
+    path: path.join(process.cwd(), 'public', fileToAttach.replace(/^\//,'')), //cwd=>current working directory
+    cid: `item${index}`} // Matches the <img src="cid:item0"> in your HTML, cid=>content id;
+});
+
+
+
 const itemsList=cart.items.map(item=>`
   <li style="margin-block:0.3em">
    <strong>Product type:</strong>${item.productType}(${item.type}) <br>
@@ -162,6 +173,25 @@ const itemsList=cart.items.map(item=>`
 
     `).join('');
 
+    const itemsListForAdmin=cart.items.map((item,index)=>`
+        <li style="margin-block:0.3em">
+         <strong>Product type:</strong>${item.productType}(${item.type}) <br>
+         ${item.productType==='cakeTopper' ? `<strong>Material:</strong>${item.material}<br>`:''}
+         <strong>Quantity:</strong>${item.quantity}<br>
+        
+<strong>Image Preview:</strong><br>
+<img src="cid:item${index}" width="100" style="border-radius:4px; border:1px solid #ccc;">
+</li>`).join('');
+
+        //  ${item.bussinessFile
+        //    ? `<strong>Bussiness Info:</strong><img src="${process.env.DOMAIN_URL}${item.bussinessFile}" alt="${item.productType}" width='80px' style="margin-right: 15px; border-radius: 4px; display: block;" >`
+        //    : `No file needed`}  
+        //   </li>
+      
+        //   `).join('');
+      
+
+
     const adminEmailHtml=`
     <h1>New Order: ${newOrder.orderNumber}</h1>
     <p><strong>Customer:</strong>${newOrder.customerName} (${newOrder.email})</p>
@@ -171,7 +201,7 @@ const itemsList=cart.items.map(item=>`
     <strong>City:</strong> ${newOrder.shippingAddress?.city || 'N/A'},<br>
     <strong>Postal Code:</strong> ${newOrder.shippingAddress?.postal_code || ''}</p>
 <h2>Products:</h2>
-    <ul>${itemsList}</ul>
+    <ul>${itemsListForAdmin}</ul>
     <p><strong>Total Products:</strong>${cart.totalProducts}</p>
     <p><strong>Total Paid:</strong> €${newOrder.totalAmount}</p>
     `
@@ -187,7 +217,8 @@ try{
     await sendEmail({
         email:'marcelodev89@gmail.com',
         subject:`New Order Received ${newOrder.orderNumber}`,
-        html:adminEmailHtml
+        html:adminEmailHtml,
+        attachments:emailAttachments
     });
 }catch(err){
     console.log(`EMAIL ERROR:`,err)
@@ -250,10 +281,13 @@ console.log('Email sent to customer!')
 await Cart.findOneAndDelete({userId});
 console.log(`Payment successful.Cart emptied`)
 
+
 }
+res.status(200).json({received:true});
+
     
-res.status(200).json({received:true})
-}
+};
+
 exports.getSessionDetail = async (req, res) => {
     try {
         //we get the sessionId from frontend=>success.js with takes it as an answer attached in url
