@@ -7,6 +7,15 @@ const checkout=`
 <button class="checkoutBtn">Checkout</button>
 
 `
+// Helper function for your frontend JS files
+const getImagePath = (path) => {
+    if (!path) return '';
+    // If it's a Cloudinary URL, return it exactly as is
+    if (path.startsWith('http')) return path;
+    // If it's a local path, you can keep it as is or add your domain
+    return path; 
+};
+
 
 // const userId=localStorage.getItem('userId');
 console.log('window.location:',window.location.href)
@@ -42,6 +51,9 @@ return;
     //     const bussinessFile=Object.keys(items[0]).includes('bussinessFile');
     // }
     // console.log('bussinessFile:',bussinessFile);
+
+
+
 //if there is some producta in the cart
 if(items.length>0){
     const regex=/(\w+\:)/g;
@@ -62,7 +74,7 @@ ${item.advantages.map(advantage=>
    
 <p id='pQuantity'><strong>Quantity:</strong><span class='quantity'>${item.quantity}</span></p>
     <p class="priceStamp">Price:${item.price}€</p>
-    ${item.bussinessFile ? ` <p class="priceStamp">Your Bussiness Info:</p><div class="img-box"><img src="${item.bussinessFile}"></div>` : ""}
+    ${item.bussinessFile ? ` <p class="priceStamp">Your Bussiness Info:</p><div class="img-box"><img src="${getImagePath(item.bussinessFile || item.image)}"></div>` : ""}
     <button class="AddBtn">Add more</button>
     <button class="ReduceBtn">Reduce</button>
     <button class="RemoveBtn">Remove</button>

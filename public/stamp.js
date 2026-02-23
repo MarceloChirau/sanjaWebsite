@@ -24,10 +24,15 @@ const data=result.data;
 // console.log('DATA:',data);
 const regex=/(\w+\:)/g;
 const html=data.map(item=>{
+// Check if the image is a full URL (Cloudinary) or a local path
+const displayImage = item.image.startsWith('http') 
+? item.image 
+: item.image; // Local paths like /images/... work fine as is if served from 'public'
+
     return`
     <div class="product-box" data-productid="${item._id}" data-producttype="${item.productType}" >
     <div class="img-box">
-    <img src="${item.image}">
+    <img src="${displayImage}" alt="${item.type}">
     </div>
     <h3 class="h3Type">${item.type}</h3>
     <p class="stampDescription">${item.description}</p>

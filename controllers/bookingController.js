@@ -4,6 +4,7 @@ const AppError=require('../utils/AppError.js');
 const sendEmail=require('../utils/email.js');
 const path = require('path');
 const stripe=require('stripe')(process.env.STRIPE_SECRET);
+const fs = require('fs');
 
 
 
@@ -148,15 +149,52 @@ const newOrder=await Order.create({
 })
 console.log('this is the newOrder:',newOrder);
 
-
 //preparing the array attachments for the admin :
-const emailAttachments = cart.items.map((item, index) => {
-    const fileToAttach = item.bussinessFile || item.image;
-  return{  filename: `${item.image}`,
-    // path.join(process.cwd(), ...) starts from your project's root folder
-    path: path.join(process.cwd(), 'public', fileToAttach.replace(/^\//,'')), //cwd=>current working directory
-    cid: `item${index}`} // Matches the <img src="cid:item0"> in your HTML, cid=>content id;
-});
+// const emailAttachments = cart.items.map((item, index) => {
+//     const fileToAttach = item.bussinessFile || item.image;
+//     const cleanPath = fileToAttach.replace(/^\//, '');
+//     const absolutePath = path.join(process.cwd(), 'public', cleanPath);
+
+//     // ONLY add to attachments if the file actually exists on THIS computer's disk
+//     if (fs.existsSync(absolutePath)) {
+//         return {
+//             filename: `item-${index}${path.extname(cleanPath)}`,
+//             path: absolutePath,
+//             cid: `item${index}`
+//         };
+//     } else {
+//         console.log(`Missing file skipped: ${absolutePath}`);
+//         return null; 
+//     }
+// }).filter(attachment => attachment !== null);
+
+
+const emailAttachments = await Promise.all(cart.items.map(async (item, index) => {
+    // If it's a Cloudinary URL (starts with http)
+    if (item.bussinessFile && item.bussinessFile.startsWith('http')) {
+        return {
+            filename: `business-info-${index}.png`,
+            path: item.bussinessFile, // Nodemailer fetches the URL automatically!
+            cid: `item${index}`
+        };
+    } 
+    
+    // Fallback for local product images (like /images/stamps/...)
+    const cleanPath = item.image.replace(/^\//, '');
+    const absolutePath = path.join(process.cwd(), 'public', cleanPath);
+    
+    if (fs.existsSync(absolutePath)) {
+        return {
+            filename: `product-${index}.jpg`,
+            path: absolutePath,
+            cid: `item${index}`
+        };
+    }
+    return null;
+}));
+
+// Filter out any nulls
+const finalAttachments = emailAttachments.filter(a => a !== null);
 
 
 

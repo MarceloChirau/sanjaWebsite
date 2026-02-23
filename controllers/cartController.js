@@ -59,7 +59,7 @@ if(product.type==='Štambilj automat'){
                 image:product.image,
                 description:product.description,
                 advantages:product.advantages, //might be a problem , i might have to put it in an array
-                bussinessFile:`/uploads/${myFile.filename}`,
+                bussinessFile:req.file.path,  //removed this `/uploads/${myFile.filename}`
                 price
             }
         ],
@@ -135,7 +135,7 @@ const newItem={
 }
 
 if(myFile){
-    newItem.bussinessFile=`/uploads/${myFile.filename}`;
+    newItem.bussinessFile=req.file.path;  //`/uploads/${myFile.filename}`
 }
 
     cart.items.push(newItem);
