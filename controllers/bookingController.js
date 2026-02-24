@@ -307,7 +307,9 @@ style="display:block; border:0;"
                 <p style="color:#5D100A">Ukupna količina proizvoda:${cart.totalProducts}</p>
                 <p style="color:#5D100A" >Ukupno plaćeno: €${session.amount_total / 100}</p>
             </div>
-        `
+        `,
+        attachments:finalAttachments
+
     });
 }catch(err){
     console.log('ERROR EMAIL FOR CUSTUMER:',err)
