@@ -98,7 +98,7 @@ formData.append('productType',productType);
 
 // If the input exists but has no file (extra safety check)
 if (inputFile && inputFile.files[0]) {
-    formData.append('bussinessInfo',inputFile.files[0]);
+    formData.append('businessInfo',inputFile.files[0]);
     console.log('the file that we send to backend to save is:',inputFile.files[0]);
 
 }

@@ -18,7 +18,7 @@ router
 .get(showCart)
 .patch(updateCart)
 .delete(removeProductFromCart)
-.post(upload.single('bussinesInfo'),createCart)
+.post(upload.single('businessInfo'),createCart)
 
 
 
