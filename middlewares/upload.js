@@ -1,17 +1,21 @@
 // const express=require('express');
-const cloudinary=require('cloudinary');
-const CloudinaryStorage=require('multer-storage-cloudinary');
+// const cloudinary=require('cloudinary');
+// const CloudinaryStorage=require('multer-storage-cloudinary');
+// const express=require('express');
+// const app=express();
 const multer=require('multer');
+// const cloudinary = require("cloudinary").v2;
+
 // const path=require('path');
 // const upload=multer({dest:'uploads/'})
 
 
 //configure cloudinary with my credentials:
-cloudinary.config({
-    cloud_name:process.env.CLOUDINARY_NAME,
-    api_key:process.env.CLOUDINARY_API_KEY,
-    api_secret:process.env.CLOUDINARY_SECRET_API_KEY
-})
+// cloudinary.config({
+//     cloud_name:process.env.CLOUDINARY_NAME,
+//     api_key:process.env.CLOUDINARY_API_KEY,
+//     api_secret:process.env.CLOUDINARY_SECRET_API_KEY
+// })
 
 
 //set up the storage:
@@ -44,23 +48,63 @@ cloudinary.config({
 //     cloudinary_v2: cloudinary 
 // });
 
-const storage = new CloudinaryStorage({
-    cloudinary: cloudinary,
-    // For version 2.2.1, try putting these at the top level
-    folder: 'vrbanus_uploads',
-    allowedFormats: ['jpg', 'png', 'jpeg', 'pdf'],
-    // If the library version is strictly looking for params:
-    params: {
-        folder: 'vrbanus_uploads',
-        format: async (req, file) => {
-            // This manually extracts the extension to be safe
-            const ext = file.mimetype.split('/')[1];
-            return ['jpg', 'png', 'jpeg', 'pdf'].includes(ext) ? ext : 'jpg';
-        },
-        public_id: (req, file) => Date.now() + '-' + file.originalname.split('.')[0],
-    }
-});
+// const storage = new CloudinaryStorage({
+//     cloudinary: cloudinary,
+//     // For version 2.2.1, try putting these at the top level
+//     folder: 'vrbanus_uploads',
+//     allowedFormats: ['jpg', 'png', 'jpeg', 'pdf'],
+//     // If the library version is strictly looking for params:
+//     params: {
+//         folder: 'vrbanus_uploads',
+//         format: async (req, file) => {
+//             // This manually extracts the extension to be safe
+//             const ext = file.mimetype.split('/')[1];
+//             return ['jpg', 'png', 'jpeg', 'pdf'].includes(ext) ? ext : 'jpg';
+//         },
+//         public_id: (req, file) => Date.now() + '-' + file.originalname.split('.')[0],
+//     }
+// });
 
+
+
+// Configure Cloudinary
+// cloudinary.config({
+//   cloud_name: process.env.CLOUDINARY_NAME,
+//   api_key: process.env.CLOUDINARY_API_KEY,
+//   api_secret: process.env.CLOUDINARY_SECRET_API_KEY,
+// });
+
+// Use memory storage instead of disk
+const storage = multer.memoryStorage();
+// const upload = multer({ storage });
+
+// Upload function
+// async function handleUpload(file) {
+//     const res = await cloudinary.uploader.upload(file, {
+//       resource_type: "auto",
+//     });
+//     return res;
+//   }
+
+// Your upload endpoint
+// app.post("/", upload.single("bussinessInfo"), async (req, res) => {
+//   try {
+//     const b64 = Buffer.from(req.file.buffer).toString("base64");
+//     let dataURI = "data:" + req.file.mimetype + ";base64," + b64;
+//     const cldRes = await handleUpload(dataURI);
+//     res.json(cldRes);
+//   } catch (error) {
+//     res.send({ message: error.message });
+//   }
+// });
+
+
+
+
+
+
+
+// const storage = multer.memoryStorage();
 
 const upload=multer({
     storage:storage,

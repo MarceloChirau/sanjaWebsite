@@ -4,19 +4,21 @@ const {createCart,showCart,updateCart,removeProductFromCart}=require('../control
 const upload=require('../middlewares/upload')
 
 
+
+
 router
 .route('/')
-.post((req,res,next)=>{
-    upload.single('bussinessInfo')(req,res,(err)=>{
-        if(err)return next(err);
-        next();
+// .post((req,res,next)=>{
+//     upload.single('bussinessInfo')(req,res,(err)=>{
+//         if(err)return next(err);
+//         next();
             
-    });
-},createCart)
+//     });
+// },createCart)
 .get(showCart)
 .patch(updateCart)
 .delete(removeProductFromCart)
-
+.post(createCart)
 
 
 

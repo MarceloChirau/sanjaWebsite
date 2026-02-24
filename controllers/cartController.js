@@ -2,10 +2,32 @@ const Cart=require('../models/cartModel');
 const Stamp=require('../models/stampModel');
 const CakeTopper = require('../models/cakeTopperModel');
 const multer=require('multer');
-const AppError=require('../utils/AppError')
+const AppError=require('../utils/AppError');
+const cloudinary = require("cloudinary").v2;
+
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_SECRET_API_KEY,
+  });
+
 
 exports.createCart=async(req,res,next)=>{
 try{
+    let bussinessFileUrl = null;
+
+    if (req.file) {
+        const b64 = Buffer.from(req.file.buffer).toString("base64");
+        let dataURI = "data:" + req.file.mimetype + ";base64," + b64;
+        
+        const cldRes = await cloudinary.uploader.upload(dataURI, {
+          resource_type: "auto",
+          folder: "vrbanus_uploads"
+        });
+        
+        bussinessFileUrl = cldRes.secure_url;
+        console.log("Uploaded to Cloudinary:", bussinessFileUrl);
+      }
 
 
     
@@ -15,6 +37,13 @@ try{
     const myFile=req.file;
     console.log('My file:',myFile);
     console.log('userId:',userId,'productId:',productId,'productType:',productType)
+
+
+
+
+
+
+
 
 let product;
     switch(productType){
