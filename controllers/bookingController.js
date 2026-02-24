@@ -256,7 +256,7 @@ try{
         email:'marcelodev89@gmail.com',
         subject:`New Order Received ${newOrder.orderNumber}`,
         html:adminEmailHtml,
-        attachments:emailAttachments
+        attachments:finalAttachments
     });
 }catch(err){
     console.log(`EMAIL ERROR:`,err)
