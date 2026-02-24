@@ -89,7 +89,7 @@ const productCard=e.target.closest('.product-box');
 const productId=productCard.dataset.productid;
 const productType=productCard.dataset.producttype;
 const inputFile=productCard.querySelector('#business-file-input');
-let userId=currentUser
+let userId=currentUser;
 
 const formData=new FormData();
 

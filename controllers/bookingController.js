@@ -181,7 +181,7 @@ const emailAttachments = await Promise.all(cart.items.map(async (item, index) =>
     
     // Fallback for local product images (like /images/stamps/...)
     const cleanPath = item.image.replace(/^\//, '');
-    const absolutePath = path.join(process.cwd(), 'public', cleanPath);
+    const absolutePath = path.join(process.cwd(), 'public', cleanPath); // cwd=>current working directory
     
     if (fs.existsSync(absolutePath)) {
         return {

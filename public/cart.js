@@ -114,12 +114,14 @@ if(cartContainer){// i did this beacuse when gallery is loading it throw an erro
             const productId=productCard.dataset.productid;
             const productType=productCard.dataset.producttype;
             const quantity=productCard.querySelector('.quantity')
+let userId=currentUser;
+
             console.log('userId…',currentUser)
     
     const response=await fetch('/api/v1/cart',{
         method:'POST',
         headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({productId,productType,userId:currentUser})
+        body:JSON.stringify({productId,productType,userId})
     })
     
     const result=await response.json();
@@ -142,11 +144,12 @@ if(cartContainer){// i did this beacuse when gallery is loading it throw an erro
             const productId=productCard.dataset.productid;
             const productType=productCard.dataset.producttype;
             const quantity=productCard.querySelector('.quantity');
+let userId=currentUser;
     
             const response=await fetch('/api/v1/cart',{
                 method:'PATCH',
                 headers:{'Content-Type':'application/json'},
-                body:JSON.stringify({userId:currentUser,productId})
+                body:JSON.stringify({userId,productId})
             })
             const result=await response.json();
     if(!response.ok){
@@ -172,11 +175,12 @@ if(cartContainer){// i did this beacuse when gallery is loading it throw an erro
             const productId=productCard.dataset.productid;
             const productType=productCard.dataset.producttype;
             const quantity=productCard.querySelector('.quantity');
+let userId=currentUser;
     
             const response=await fetch('/api/v1/cart',{
                 method:'DELETE',
                 headers:{'Content-Type':'application/json'},
-                body:JSON.stringify({userId:currentUser,productId})
+                body:JSON.stringify({userId,productId})
             })
             const result=await response.json();
     if(!response.ok){
