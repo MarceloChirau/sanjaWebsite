@@ -15,8 +15,13 @@ cloudinary.config({
 exports.createCart=async(req,res,next)=>{
 try{
 
-    if (!req.body) {
-        return res.status(400).json({ status: 'fail', message: 'No data provided in request body' });
+// 1. Log what is actually arriving
+console.log('--- RAW REQUEST DATA ---');
+console.log('BODY:', req.body);
+console.log('FILE:', req.file ? 'Received' : 'None');
+
+    if (!req.body || Object.keys(req.body).length===0) {
+        return res.status(400).json({ status: 'fail', message: 'Server received an empty body. Ensure text fields are sent before the file.' });
     }
 
     const {userId,productId,productType}=req.body;
