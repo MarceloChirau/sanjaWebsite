@@ -92,7 +92,9 @@ const inputFile=productCard.querySelector('#business-file-input');
 let userId=currentUser;
 
 const formData=new FormData();
-
+formData.append('productId',productId);
+formData.append('productType',productType);
+formData.append('userId',userId)
 // If the input exists but has no file (extra safety check)
 if (inputFile && inputFile.files[0]) {
     formData.append('bussinessInfo',inputFile.files[0]);
@@ -101,9 +103,7 @@ if (inputFile && inputFile.files[0]) {
 }
 
 
-formData.append('productId',productId);
-formData.append('productType',productType);
-formData.append('userId',userId)
+
 
     const response=await fetch('/api/v1/cart',{
         method:"POST",

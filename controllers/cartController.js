@@ -14,6 +14,14 @@ cloudinary.config({
 
 exports.createCart=async(req,res,next)=>{
 try{
+
+    if (!req.body) {
+        return res.status(400).json({ status: 'fail', message: 'No data provided in request body' });
+    }
+
+    const {userId,productId,productType}=req.body;
+    console.log('userId:',userId,'productId:',productId,'productType:',productType)
+
     let bussinessFileUrl = null;
 
     if (req.file) {
@@ -33,10 +41,8 @@ try{
     
     //we created the userId once user is navigating our site,productId is the id of the product and producType is to know what type is 
     // productType should be: 'stampId', 'awardId', or 'cakeTopperId'
-    const {userId,productId,productType}=req.body;
     const myFile=req.file;
     console.log('My file:',myFile);
-    console.log('userId:',userId,'productId:',productId,'productType:',productType)
 
 
 
@@ -49,13 +55,13 @@ let product;
     switch(productType){
         //if it is a stamp then search for a stamp with the id provided
         case "stamp":
-           product=await Stamp.findById({_id:productId});
+           product=await Stamp.findById(productId);
             break;
             
             
             //if it is a cakeTopper then search for a cakeTopper with the id provided
         case 'cakeTopper':
-            product=await CakeTopper.findById({_id:productId})
+            product=await CakeTopper.findById(productId);
             break;
             default:
                 return res.status(400).json({status:'fail',message:'Invalid product type'})
@@ -88,7 +94,7 @@ if(product.type==='Štambilj automat'){
                 image:product.image,
                 description:product.description,
                 advantages:product.advantages, //might be a problem , i might have to put it in an array
-                bussinessFile:req.file.path,  //removed this `/uploads/${myFile.filename}`
+                bussinessFile:bussinessFileUrl,     //removed this `/uploads/${myFile.filename}`   req.file.path
                 price
             }
         ],
@@ -145,7 +151,7 @@ if(existingItemIndex>-1){
 //here i could add a total price of the same products together
 
 if (myFile) {
-    cart.items[existingItemIndex].bussinessFile = `/uploads/${myFile.filename}`;
+    cart.items[existingItemIndex].bussinessFile =bussinessFileUrl ;  //`/uploads/${myFile.filename}`
 }
 }else{
     // cart.items.push({[productType]:productId,quantity:1,price});
@@ -164,7 +170,7 @@ const newItem={
 }
 
 if(myFile){
-    newItem.bussinessFile=req.file.path;  //`/uploads/${myFile.filename}`
+    newItem.bussinessFile=bussinessFileUrl; //`/uploads/${myFile.filename}`  req.file.path; 
 }
 
     cart.items.push(newItem);
