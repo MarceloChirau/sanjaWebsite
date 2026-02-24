@@ -149,24 +149,7 @@ const newOrder=await Order.create({
 })
 console.log('this is the newOrder:',newOrder);
 
-//preparing the array attachments for the admin :
-// const emailAttachments = cart.items.map((item, index) => {
-//     const fileToAttach = item.bussinessFile || item.image;
-//     const cleanPath = fileToAttach.replace(/^\//, '');
-//     const absolutePath = path.join(process.cwd(), 'public', cleanPath);
 
-//     // ONLY add to attachments if the file actually exists on THIS computer's disk
-//     if (fs.existsSync(absolutePath)) {
-//         return {
-//             filename: `item-${index}${path.extname(cleanPath)}`,
-//             path: absolutePath,
-//             cid: `item${index}`
-//         };
-//     } else {
-//         console.log(`Missing file skipped: ${absolutePath}`);
-//         return null; 
-//     }
-// }).filter(attachment => attachment !== null);
 
 
 const emailAttachments = await Promise.all(cart.items.map(async (item, index) => {
@@ -187,7 +170,7 @@ const emailAttachments = await Promise.all(cart.items.map(async (item, index) =>
         return {
             filename: `product-${index}.jpg`,
             path: absolutePath,
-            cid: `item${index}`
+            cid: `item${index}` //content id
         };
     }
     return null;
@@ -205,7 +188,8 @@ const itemsList=cart.items.map(item=>`
    <strong>Quantity:</strong>${item.quantity}<br>
   
    ${item.bussinessFile
-     ? `<strong>Bussiness Info:</strong><img src="${process.env.DOMAIN_URL}${item.bussinessFile}" alt="${item.productType}" width='80px' style="margin-right: 15px; border-radius: 4px; display: block;" >`
+     ? `<strong>Bussiness Info:</strong><img src="${process.env.DOMAIN_URL}${item.bussinessFile}" alt="${item.productType}" width='80px' style="margin-right: 15px; border-radius: 4px; display: block;" ><br>
+     <a href="${process.env.DOMAIN_URL}${item.bussinessFile}" target="_blank">Click here to view your uploaded file if the image doesnt load.</a>`
      : `<strong>Product Image:</strong><img src="${process.env.DOMAIN_URL}${item.image}" alt="${item.productType}" width='80px' style="margin-right: 15px; border-radius: 4px; display: block;">`}  
     </li>
 
