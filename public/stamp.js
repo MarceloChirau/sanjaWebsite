@@ -103,7 +103,7 @@ if (inputFile && inputFile.files[0]) {
 
 formData.append('productId',productId);
 formData.append('productType',productType);
-formData.append('userId',currentUser)
+formData.append('userId',userId)
 
     const response=await fetch('/api/v1/cart',{
         method:"POST",
