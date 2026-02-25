@@ -188,8 +188,8 @@ const itemsList=cart.items.map(item=>`
    <strong>Quantity:</strong>${item.quantity}<br>
   
    ${item.bussinessFile
-     ? `<strong>Bussiness Info:</strong><img src="${process.env.DOMAIN_URL}${item.bussinessFile}" alt="${item.productType}" width='80px' style="margin-right: 15px; border-radius: 4px; display: block;" ><br>
-     <a href="${process.env.DOMAIN_URL}${item.bussinessFile}" target="_blank">Click here to view your uploaded file if the image doesnt load.</a>`
+     ? `<strong>Bussiness Info:</strong><img src="${item.bussinessFile}" alt="${item.productType}" width='80px' style="margin-right: 15px; border-radius: 4px; display: block;" ><br>
+     <a href="${item.bussinessFile}" target="_blank">Click here to view your uploaded file if the image doesnt load.</a>`
      : `<strong>Product Image:</strong><img src="${process.env.DOMAIN_URL}${item.image}" alt="${item.productType}" width='80px' style="margin-right: 15px; border-radius: 4px; display: block;">`}  
     </li>
 
@@ -205,12 +205,7 @@ const itemsList=cart.items.map(item=>`
 <img src="cid:item${index}" width="100" style="border-radius:4px; border:1px solid #ccc;">
 </li>`).join('');
 
-        //  ${item.bussinessFile
-        //    ? `<strong>Bussiness Info:</strong><img src="${process.env.DOMAIN_URL}${item.bussinessFile}" alt="${item.productType}" width='80px' style="margin-right: 15px; border-radius: 4px; display: block;" >`
-        //    : `No file needed`}  
-        //   </li>
-      
-        //   `).join('');
+       
       
 
 
