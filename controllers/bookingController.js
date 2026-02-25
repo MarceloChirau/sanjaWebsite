@@ -24,12 +24,15 @@ if (needsFile) {
     return next(new AppError('One or more items require business info upload before checkout.', 400));
 }
 
-const domain=process.env.NODE_ENV==='development'
-? 'https://aryan-interlaboratory-junita.ngrok-free.dev'
+const domain=process.env.NODE_ENV==='production'
+? process.env.DOMAIN_URL
 : `${req.protocol}://${req.get('host')}`;
 
 const lineItems=cart.items.map(item=>{
-    const fullImageUrl = `${domain}${item.image.replace(/^\//,'')}`
+
+    const fullImageUrl =item.image.startsWith('http')    //`${domain}${item.image.replace(/^\//,'')}`
+       ?item.image
+       :  `${domain}${item.image.startsWith('/') ? '' : '/'}${item.image}`;                             
 
 /*
 item.image.startsWith('http') 
